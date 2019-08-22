@@ -1,0 +1,14 @@
+PROC C_DRESS_SHAPE DISPLOF
+;***********程序功能**********
+;*齿形选择
+;****************************
+
+IF DRESSER[18]+DRESSER[19]+DRESSER[20]==0;第一遍跳出
+    RET
+ENDIF
+
+EXECSTRING(SHAPE);调用由SHAPE指定的修型程序
+DRESSER[5]=1;旧砂轮
+
+RET
+

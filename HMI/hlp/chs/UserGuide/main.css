@@ -1,0 +1,54 @@
+.head1 {
+    color: red;
+    font-size: large;
+}
+.head2 {
+    color: blue;
+    font-size: large;
+}
+.head3 {
+    color: black;
+    font-size: medium;
+}
+.head4 {
+    color: black;
+    font-size: medium;
+}
+.title1 {
+    padding-left: 0pt;
+    color: red;
+    font-size: large;
+}
+.title2 {
+    padding-left: 8pt;
+    color: blue;
+    font-size: large;
+}
+.var_mark {
+    color: red;
+}
+.parameterExplain {
+    color: blue;
+    font-style: normal;
+}
+.parameterCell {
+    border-color: black;
+    border-width: 3px;
+    font-size: medium;
+    color: black;
+}
+.alarm1 {
+    color: red;
+}
+.highlight {
+    color: red;
+    text-decoration: underline;
+}
+.list {
+    color: black;
+    font-size: medium;
+}
+.tableStyle {
+    color: black;
+    font-size: medium;
+}

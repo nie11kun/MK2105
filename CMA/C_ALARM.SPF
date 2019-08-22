@@ -1,0 +1,76 @@
+PROC C_ALARM DISPLOF
+;***********程序功能**********
+;*报警处理:
+;*系统所有报警的处理，及显示
+;****************************
+
+CASE DRESSER[6] OF 1 GOTOF ALARM_1 2 GOTOF ALARM_2 3 GOTOF ALARM_3 4 GOTOF ALARM_4 5 GOTOF ALARM_5 6 GOTOF ALARM_6 7 GOTOF ALARM_7 8 GOTOF ALARM_8 9 GOTOF ALARM_9 10 GOTOF ALARM_10 11 GOTOF ALARM_11 12 GOTOF ALARM_12 DEFAULT GOTOF ALARM_ABORT
+
+ALARM_1:
+;
+MSG("工件左端坐标>工件右端坐标"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_2:
+;
+MSG("砂轮过小,请更换新砂轮!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_3:
+;
+MSG("砂轮过大,请将砂轮修整到小于最大磨削直径!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_4:
+;
+MSG("工件外径设置有误!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_5:
+;
+MSG("测头无法进入孔内,请检查参数设置!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_6:
+;
+MSG("工件小径设置有误,或检测位置太靠外侧!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_7:
+;
+MSG("测头距离工件过远,或检测位置太靠外侧!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_8:
+;
+MSG("工件长度设置有误!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_9:
+;
+MSG("外圆砂轮过小,请更换新砂轮!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_10:
+;
+MSG("测量多段螺距结果有误!"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_11:
+;
+MSG("外圆跳动:"<<INI[133]<<"mm,工件圆度过大!阈值:"<<INI[127]<<"mm"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_12:
+;
+MSG("工件右端过长，检查是否放置有误或重新设置右端磨削位置"); ifIsCHS
+GOTOF ALARM_DELAY
+
+ALARM_DELAY:
+M49;红灯报警
+G4 F999999
+GOTOB ALARM_DELAY
+
+ALARM_ABORT:
+RET
+

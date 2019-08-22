@@ -1,0 +1,24 @@
+PROC F_GRINDWHEEL_RUN(REAL SPEED) DISPLOF
+;***********程序功能**********
+;*砂轮启动
+;SPEED:转速
+;****************************
+
+IF $A_DBB[12]==0;砂轮当前未启动
+    INI[71]=INI[112];砂轮启动等待转速到位延时时间
+ELSE
+    INI[71]=INI[113]
+ENDIF
+
+IF (INI[36]==0) OR (INI[36]==2);砂轮类型选择
+    R299=SPEED
+    G4 F0.2
+    M13;砂轮启动
+ELSE
+    M1=3 S1=SPEED
+ENDIF
+
+G4 F=INI[71];砂轮转速等待时间
+
+RET
+

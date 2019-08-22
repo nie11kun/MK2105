@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE HMI_SL_HELP>
+<HMI_SL_HELP language="eng">
+	<BOOK ref="index.html" title="User Guide" helpdir="UserGuide">
+		<ENTRY ref ="section_1.html" title="HMI Parameter Intro" >
+			<ENTRY ref ="section_1.html#S1D1" title="Grinding Panel" >
+				<INDEX_ENTRY ref="section_1.html#S1_1" title="Grinding Panel" />
+			</ENTRY>
+		</ENTRY>
+		<ENTRY ref ="section_2.html" title="Function Intro" >
+			<ENTRY ref ="section_2.html#S2D1" title="Dress" >
+				<INDEX_ENTRY ref="section_2.html#S2D1" title="Dress" />
+			</ENTRY>
+		</ENTRY>
+	</BOOK>
+</HMI_SL_HELP>

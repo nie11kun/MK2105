@@ -1,0 +1,86 @@
+PROC D_GRIND DISPLOF
+;***********程序功能**********
+;*螺纹小循环:
+;*完整磨削一个工件循环
+;****************************
+
+DEF REAL TEMPANG
+
+WORK[1]=0;当前头
+WORK[2]=360/WORK[0];每头累加角度
+INI[47]=1;磨削中不正常退出标记
+
+F_C_MODIFY_BY_Z(TOOL_SET[42])
+TOOL_SET[42]=0;清零
+
+E_ZHONGJIN_FIX(GRIND[4])
+GRIND[4]=0;清零
+
+WHILE(WORK[1]<WORK[0])
+	WORK[3]=WORK[2]*WORK[1];当前头角度=平均头数角度*当前头数
+	TEMPANG=WORK[3]+TOOL_SET[4]
+	F_ANG_WITHIN_360(TEMPANG)
+
+	G90 G01 C=ACP(TEMPANG) F=INI[58];头数切换,角度增量累加
+	F_Z_POSITION(INI[6]);Z轴到磨削起点
+
+	E_CYCLE_MESSAGE
+
+	IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI[72]==1) OR (PROCESS[6]==0) OR (WORK[0]>1);第一次磨削或者修整后的磨削或者单向或者头数大于1
+		INI[72]=0;标记清零
+		G90 G01 X=PROCESS[4]+PROCESS[8]*2 F=500;快速到达磨削位置附近
+	ENDIF
+
+	G90 G01 X=PROCESS[4]+PROCESS[8] F=100;快速到达磨削位置附近
+	IF PROCESS[6]==0;单向/双向
+		X=PROCESS[4] F=20;X进给
+	ELSE
+		X=PROCESS[4]+PROCESS[8]/2 F=20;双向磨削X进给
+	ENDIF
+	
+	FGROUP(Z)
+	IF TOOL_SET[59]==0;没有变螺距
+		F_ZC_START(INI[6],INI[7],INI[5],PROCESS[9],1)
+	ELSE
+    	F_ZC_START_CHANGE_PITCH(INI[6],TOOL_SET[64],TOOL_SET[65],INI[7],INI[5],TOOL_SET[66],PROCESS[9],1)
+	ENDIF
+	IF $A_DBB[2]==1;磨削中途按下退刀,安全结束程序
+		RET
+	ENDIF
+	STOPRE
+	IF PROCESS[6]==1;单向/双向
+		G4 F0.5
+		G91 G01 X=-PROCESS[8]/2 F=20
+		E_CYCLE_MESSAGE
+		IF TOOL_SET[59]==0;没有变螺距
+			F_ZC_START(INI[7],INI[6],INI[5],PROCESS[9],1)
+		ELSE
+    		F_ZC_START_CHANGE_PITCH(INI[7],TOOL_SET[65],TOOL_SET[64],INI[6],INI[5],TOOL_SET[66],PROCESS[9],1)
+		ENDIF
+		IF $A_DBB[2]==1
+			RET
+		ENDIF
+		;*********************
+;
+		E_DOUBLEGRIND_XBACK(INI[10]);内螺纹  ifIsInternal
+		;*********************
+	ELSE
+		;*********************
+;
+		E_SINGLEGRIND_XZBACK(INI[10]);内螺纹  ifIsInternal
+		;*********************
+		IF $A_DBB[2]==1;返回起点过程中按下退刀键,安全结束程序
+			RET
+		ENDIF
+		STOPRE
+		INI[47]=1;磨削中不正常退出标记
+	ENDIF
+	STOPRE
+	WORK[1]=WORK[1]+1;头数累加
+ENDWHILE
+
+STOPRE
+INI[47]=0;磨削中不正常退出标记
+
+RET
+

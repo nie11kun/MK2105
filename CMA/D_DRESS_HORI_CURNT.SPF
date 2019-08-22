@@ -1,0 +1,10 @@
+PROC D_DRESS_HORI_CURNT(REAL FEED) DISPLOF
+;***********程序功能**********
+;*新砂轮修整模式1下当前左右修整位置
+;****************************
+
+DRESSER[134]=DRESSER[134]-FEED;当前左端水平修整位置
+DRESSER[135]=DRESSER[135]+FEED;当前右端水平修整位置
+
+RET
+

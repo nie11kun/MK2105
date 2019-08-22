@@ -1,0 +1,55 @@
+PROC B_DRESS DISPLON
+;***********程序功能**********
+;*修整主程序
+;****************************
+
+C_DRESS_CHOICE;修整参数赋值
+C_DRESS_START;报警及参数初始化
+
+IF (DRESSER[6]<>0) OR (DRESSER[11]+DRESSER[12]==0);有报警标记/修整次数为零
+    DRESSER[19]=DRESSER[19]+1;精修当前次数加一,匹配完整修整完成时的结果
+    GOTOF D_ENDING
+ENDIF
+
+IF (DRESSER[0]==0) OR (DRESSER[0]==1);VW/XZ
+    C_WHEL_SHAPE;修整轮选择水平位置计算
+ENDIF
+
+C_DRESS_SHAPE_INIT;垂直位置计算
+C_LINESPEED_DRESS;砂轮速度
+
+IF (DRESSER[0]==0) OR (DRESSER[0]==1);VW/XZ
+    C_DRESS_INIT_POSITION_CB;修整轮运行至起始位置
+ELSE;
+    C_DRESS_INIT_POSITION_CX;修整轮运行至起始位置
+ENDIF
+
+WHILE(DRESSER[18]+DRESSER[19]<=DRESSER[11]+DRESSER[12])
+    STOPRE
+    IF (DRESSER[18]+DRESSER[19]+DRESSER[20]<>0) AND ((DRESSER[18]+DRESSER[19]+DRESSER[20])/20-TRUNC((DRESSER[18]+DRESSER[19]+DRESSER[20])/20)==0)
+        C_LINESPEED_DRESS;砂轮速度
+        G4 F1.5;重新计算转速后的延时
+    ENDIF
+    D_GRINDWHEEL_DIACURNT;当前砂轮直径计算
+    M28;修整冷却开
+    C_DRESS_SHAPE;修整
+    IF $A_DBB[2]==1;修整中途安全结束程序
+        DRESSER[19]=DRESSER[19]+1
+        GOTOF DRESS_ENDING
+    ENDIF
+    C_DRESS_CALC;次数累积
+ENDWHILE
+M29;修整冷却关
+DRESS_ENDING:
+
+IF (DRESSER[0]==0) OR (DRESSER[0]==1);VW/XZ
+    C_DRESS_END_POSITION_CB;修整轮运行至结束位置
+ELSE
+    C_DRESS_END_POSITION_CX;修整轮运行至结束位置
+ENDIF
+
+D_ENDING:
+F_DRESSWHEEL_STOP;修整轮停止
+
+RET
+

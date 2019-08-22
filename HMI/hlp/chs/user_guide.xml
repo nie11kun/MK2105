@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE HMI_SL_HELP>
+<HMI_SL_HELP language="chs">
+	<BOOK ref="index.html" title="用户手册" helpdir="UserGuide">
+		<ENTRY ref ="section_1.html" title="HMI界面参数定义" >
+			<ENTRY ref ="section_1.html" title="磨削界面" >
+				<INDEX_ENTRY ref="section_1.html" title="磨削界面" />
+			</ENTRY>
+			<ENTRY ref ="section_2.html" title="工艺界面" >
+				<INDEX_ENTRY ref="section_2.html" title="工艺界面" />
+			</ENTRY>
+			<ENTRY ref ="section_3.html" title="修整界面" >
+				<INDEX_ENTRY ref="section_3.html" title="修整界面" />
+			</ENTRY>
+			<ENTRY ref ="section_4.html" title="滚轮界面" >
+				<INDEX_ENTRY ref="section_4.html" title="滚轮界面" />
+			</ENTRY>
+			<!--removed-->
+
+			<!--removed-->
+		</ENTRY>
+		<ENTRY ref ="section_10.html" title="机床功能介绍" >
+			<!--ifIsNotCenterBegin-->
+			<ENTRY ref ="section_10.html" title="修整" >
+				<INDEX_ENTRY ref="section_10.html" title="修整" />
+			</ENTRY>
+			<ENTRY ref ="section_11.html" title="对刀" >
+				<INDEX_ENTRY ref="section_11.html" title="对刀" />
+			</ENTRY>
+			<ENTRY ref ="section_12.html" title="磨削" >
+				<INDEX_ENTRY ref="section_12.html" title="磨削" />
+			</ENTRY>
+			<!--ifIsNotCenterEnd-->
+
+			<!--removed-->
+		</ENTRY>
+	</BOOK>
+</HMI_SL_HELP>

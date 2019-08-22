@@ -1,0 +1,85 @@
+PROC B_SCREW DISPLON
+;***********程序功能**********
+;*螺纹主程序:
+;*修整 对刀 磨削 程序的调用
+;****************************
+
+;
+
+C_PAR_INI;参数初始化子程序
+
+IF DRESSER[6]<>0;有报警标记则退出程序
+    GOTOF G_ENDING
+ENDIF
+
+IF INI[144]==0;砂轮是否恒转速(0否1是)
+    C_PARA_TRAN(DRESSER[26],DRESSER[28],DRESSER[30],WHEEL_LINESPEED_DRESS[1]);参数传递
+ELSE
+    C_PARA_TRAN(DRESSER[26],DRESSER[28],DRESSER[30],DRESSER[36]);参数传递
+ENDIF
+C_TECH_PARA_TRANS;单件/批量工艺界面参数传递
+
+M20;吸雾开
+M26;空调开
+
+IF GRIND[1]<>0
+    B_DRESS;修整
+    INI[40]=0;新砂轮磨削接触位计算标记
+    GOTOF G_ENDING
+ENDIF
+
+C_ROTATE_ANGLE;螺旋升角
+
+IF GRIND[2]<>0
+    IF INI[78]==0;无二次对刀
+        TOOL_SET[8]=0;改为首次对刀
+    ENDIF
+    B_OPERATION;对刀
+    IF DRESSER[6]<>0;有报警标记则退出程序
+        GOTOF G_ENDING
+    ENDIF
+    IF (GRIND[2]<>2) OR (INI[90]==0);不是纯自动对刀或自动对刀后不直接磨削
+        GOTOF G_ENDING
+    ENDIF
+ENDIF
+
+;使用界面参数还是DIY参数
+IF PROCESS[0]==0;选择界面工艺
+    DIY[1]=0;DIY磨削次数
+    IF TECHNOLOGY[10]+TECHNOLOGY[11]+TECHNOLOGY[12]+TECHNOLOGY[13]==0;工艺参数中设置的总磨削次数
+        RET
+    ENDIF
+ELSE;选择DIY工艺
+    PROCESS[2]=4;当前工艺切换到DIY
+    IF DIY[1]==0
+        RET
+    ENDIF
+ENDIF
+
+STOPRE
+TOOL_SET[8]=1;改为二次对刀
+GRIND[1]=0;不修整
+GRIND[2]=0;不对刀
+WHILE(TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]<=TECHNOLOGY[10]+TECHNOLOGY[11]+TECHNOLOGY[12]+TECHNOLOGY[13]+DIY[1])
+    STOPRE
+    C_CYCLE;螺纹磨削循环
+    IF INI[144]==0;砂轮是否恒转速(0否1是)
+        C_PARA_TRAN(DRESSER[26],DRESSER[28],DRESSER[30],WHEEL_LINESPEED_DRESS[1]);参数传递
+    ELSE
+        C_PARA_TRAN(DRESSER[26],DRESSER[28],DRESSER[30],DRESSER[36]);参数传递
+    ENDIF
+    C_TECH_PARA_TRANS;单件/批量工艺界面参数传递
+    IF (DRESSER[6]<>0) OR ($A_DBB[2]==1);有报警/按下退刀键则退出程序
+        GOTOF G_ENDING
+    ENDIF
+    C_BCYC;工序进给大循环判断
+	C_LINESPEED_GRIND;磨削时砂轮速度调节子程序
+ENDWHILE
+C_WORKS_CUMU;工件计数
+
+G_ENDING:
+C_GRINDING_END;运行结束
+C_ALARM;机床报警
+
+RET
+

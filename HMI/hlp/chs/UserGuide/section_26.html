@@ -1,0 +1,638 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset="UTF-8"/>
+        <title>外圆参数</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    </head>
+    
+    <body>
+        <div class="head1"><a href="index.html">磨削中心介绍</a>
+            <hr>
+            <div class="head2">外圆参数
+                <hr>
+                <div class="head2">磨削参数
+                    <hr>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D1">外圆退刀位</a></td>
+                                <td>推荐设置：外圆轴向后极限位</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>无</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数影响加工内磨时外圆砂轮停留安全位置<br>
+                            推荐将此参数设置到向后极限位置，保证机床安全运行<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D2">台面磨削起始</a></td>
+                                <td>推荐设置：工件离开外圆砂轮后Z坐标</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>无</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数影响加工完成后台面停留位置<br>
+                            推荐将此参数设置到保证工件离开外圆砂轮<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D3">加工模式</a></td>
+                                <td>推荐设置：根据需要</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>批量加工/单件小批量</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数影响磨削时起刀位置<br>
+                            单件小批量：启动程序后从<b class="highlight">当前</b>磨削位置开始加工<br>
+                            批量生产：  启动程序后从<b class="highlight">初始</b>磨削位置开始加工<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D4">磨削起点</a></td>
+                                <td>推荐设置：自动计算</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数时根据端面参数界面的左端面初始接触自动计算而来<br>
+                            磨削起点=左端面初始接触+0.2mm<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D5">磨削终点</a></td>
+                                <td>推荐设置：自动计算</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数时根据端面参数界面的右端面初始接触自动计算而来<br>
+                            磨削起点=右端面初始接触+0.2mm<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D6">退刀槽长度</a></td>
+                                <td>推荐设置：根据工件</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            根据工件左端面与外圆根部退刀槽长度设置<br>
+                            从起点往终点磨削时会跳过退刀槽长度，反向从终点往起点磨削时会磨削退刀槽部分<br>
+                            此设置是为了防止进到时砂轮尖部磨损，加工出的工件外圆有条纹<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D8">外圆初始磨削接触</a></td>
+                                <td>推荐设置：手动测量后输入</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为批量生产时使用的磨削位置<br>
+                            为保证安全，手动用砂轮接触工件外圆后，将坐标后退0.1mm后输入此参数<br>
+                            自动对刀不自动计算初始磨削位置，此值需手动设置<br>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D9">外圆当前磨削接触</a></td>
+                                <td>推荐设置：自动累计</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为单件小批量时使用的磨削位置<br>
+                            磨削过程中，此参数会根据进刀量自动累积<br>
+                    </div>
+                </div>
+                <hr>
+                <div class="head2">工艺参数
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D10">已加工</a></td>
+                                <td>推荐设置：0</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为自动累计值<br>
+                            每在批量加工模式下完成一次磨削程序，此参数自动累加一次<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D11">修整设定</a></td>
+                                <td>推荐设置：0</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>根据工艺要求</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数设定为每磨削几件修整一次砂轮<br>
+                            通过设定此参数可以实现加工多件工件后自动修整一次砂轮的功能<br>
+                            注意：修整时调用修整界面精修参数(次数/修整量/速度)<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D12">循环次数</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            根据工件磨削余量控制<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D13">进给深度</a></td>
+                                <td>推荐设置：0.005~0.05</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            根据磨削工艺要求，合理分配粗磨精磨进刀量，一般粗磨大进刀量去余量，精磨小进刀量光刀<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D14">磨削速度</a></td>
+                                <td>推荐设置：100</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            砂轮从磨削起点到终点移动时的速度<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D15">修整设定</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            当前工艺磨削循环次数到达修整设定次数后进行一次修整<br>
+                            注意：修整时调用修整界面精修参数(次数/修整量/速度)<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D16">砂轮线速度</a></td>
+                                <td>推荐设置：30m/s</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>15~50</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            砂轮磨削线速度根据砂轮材质及工件材质不同变化较大<br>
+                            具体设置方案请进行测试后设置<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D17">头架转速</a></td>
+                                <td>推荐设置：120</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>小于120转</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            头架转速和表面粗糙度有关<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D39">外圆长度</a></td>
+                                <td>推荐设置：根据工件实际设置</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            测量工件外圆部分长度，磨削方式为保持时此参数影响分段磨削每段长度<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D40">保持分段</a></td>
+                                <td>推荐设置：</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>1~10</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            外圆保持磨削时，如果砂轮宽度小于工件外圆长度，需要进行分段磨削<br>
+                            推荐分段磨削时，保证每段的宽度小于砂轮宽度<br>
+                            当不需要分段时设为：1<br>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="head2">修整参数
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D18">累计修整量</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            记录当前砂轮半径方向已修整掉多少<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D19">锥度微调</a></td>
+                                <td>推荐设置：0</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>0~0.02</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            加工的工件经过测量后，如果外圆有轻微锥度的话，可以通过此参数将砂轮稍微修处斜面来调整<br>
+                            注意此参数只能作为微调使用，不可过大调整，以免加工出的工件表面有条纹<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D20">砂轮状态</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>新砂轮/旧砂轮</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            当更换新砂轮时，切换到新砂轮。还需设置正确新砂轮直径及初始修整位置<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D21">粗修次数</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            点击修整键进行修整的时候，执行粗修的次数<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D22">粗修进给量</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            粗修时每次修整进给量<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D23">粗修速度</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            粗修时修整速度<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D24">精修次数</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            点击修整键进行修整的时候，执行精修的次数<br>
+                            磨削中修整的时候，调用此精修次数进行修整<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D25">精修进给量</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            精修时每次修整进给量<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D26">精修速度</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            精修时修整速度<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D27">修整起点</a></td>
+                                <td>推荐设置：金刚笔在砂轮左侧外5mm处Z轴坐标</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            手动将金刚笔开到砂轮左侧合适位置，记录Z轴坐标定位修整起点<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D28">修整终点</a></td>
+                                <td>推荐设置：金刚笔在砂轮右侧外5mm处Z轴坐标</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            手动将金刚笔开到砂轮右侧合适位置，记录Z轴坐标定位修整起点<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D29">新砂轮直径</a></td>
+                                <td>推荐设置：测量设置</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            新砂轮直径，此参数为更换新砂轮后修整时使用的参数，需正确测量后设置<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D30">当前砂轮直径</a></td>
+                                <td>推荐设置：自动累积</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            新砂轮修整后，每次修整自动累积<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D31">砂轮线速度</a></td>
+                                <td>推荐设置：无</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            修整时，砂轮的线速度。为保证修整质量，请设置合适数值<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D32">当前接触</a></td>
+                                <td>推荐设置：自动累积</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数输入金刚笔和砂轮前后位置上U轴的坐标<br> <!--ifIsHasULine-->
+                            此参数输入金刚笔和砂轮前后位置上X轴的坐标<br> <!--ifIsNotHasULine-->
+                            当前砂轮和金刚笔接触时候的坐标，砂轮状态为旧砂轮时使用此修整位置开始修整。此参数每次修整后会自动计算累计<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D33">初始接触</a></td>
+                                <td>推荐设置：手动测量后输入</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数输入金刚笔和砂轮前后位置上U轴的坐标<br> <!--ifIsHasULine-->
+                            此参数输入金刚笔和砂轮前后位置上X轴的坐标<br> <!--ifIsNotHasULine-->
+                            新砂轮时砂轮和金刚笔修整位置，此参数需保证第一次修整时金刚笔从起点到终点修整过程中金刚笔不要接触砂轮<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D34">最小磨削直径</a></td>
+                                <td>推荐设置：计算砂轮最小可用直径</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            根据砂轮法兰或磨杆尺寸，计算砂轮最小可用到的直径，当砂轮小于此直径时机床将报警<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D35">台阶距左端面</a></td>
+                                <td>推荐设置：根据工件图纸</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为加工台阶时使用，根据工件需要设置合适数值<br>
+                            注意：<br>
+                            磨削台阶需要在外圆磨削后进行，台阶磨削起始位置为外圆当前磨削位置<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D36">磨削方式</a></td>
+                                <td>推荐设置：根据工件长短</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>来回/保持</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为磨削时的动作<br>
+                            来回：进刀后，砂轮水平从磨削起点移动到磨削终点，再反向回来<br>
+                            保持：砂轮持续进刀，不进行水平移动磨削<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D37">磨削砂轮转速</a></td>
+                                <td>推荐设置：根据需要选择</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为磨削砂轮转速<br>
+                            此选项开放输入时表示砂轮为恒转速模式<br>
+                        </p>
+                    </div>
+                    <div class="parameterCell">
+                        <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                            <tr>
+                                <td><a class="var_mark" name="S26D38">修整砂轮转速</a></td>
+                                <td>推荐设置：根据需要选择</td>
+                            </tr>
+                            <tr>
+                                <td>取值范围</td>
+                                <td>大于零</td>
+                            </tr>
+                        </table>
+                        <p class="parameterExplain">
+                            此参数为修整时砂轮转速<br>
+                            此选项开放输入时表示砂轮为恒转速模式<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

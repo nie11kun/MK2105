@@ -1,0 +1,21 @@
+PROC A_GRINDING DISPLON
+;**********程序功能**********
+;*主程序
+;****************************
+
+B_MACHINE_INI;机床初始化
+
+B_C_MOV;C轴旋转动作
+
+IF RING[0]==0;螺纹/环形槽加工
+    RING[6]=0;任意槽的X相对偏移量
+    RING[7]=0;任意槽的Z相对偏移量
+    B_SCREW;磨削主程序
+ELSE
+    B_RING_GROOVE;环形槽
+ENDIF
+
+ENDING:
+
+RET
+

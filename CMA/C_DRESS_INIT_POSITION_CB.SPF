@@ -1,0 +1,19 @@
+PROC C_DRESS_INIT_POSITION_CB DISPLOF
+;***********程序功能**********
+;*修整初始移动位置
+;****************************
+
+;
+MSG("修整轮运行至起始位置"); ifIsCHS
+IF GRIND[0]<>1;不是内螺纹
+    G1 G90 X=WHEEL[10]+2 F=INI[55];x轴回退到修整接触位+2
+ELSE
+    G1 G90 X=WHEEL[10]-2 F=INI[55];x轴回退到修整接触位-2
+ENDIF
+C_RESET_ANGLE;升角复位
+;
+MSG("台面到位中"); ifIsCHS
+G1 G90 Z=DRESSER[33]+DRESSER[22]/2+5 F=INI[56];z轴快速接近
+
+RET
+

@@ -1,0 +1,27 @@
+PROC C_ROTATE_ANGLE DISPLOF
+;***********程序功能**********
+;*螺旋升角
+;****************************
+
+IF INI[16]==1
+	IF TRUNC($AA_IM[A]*1000)<>TRUNC(INI[20]*1000)
+		M73;液压开
+		G4 F1
+		M35;松开
+		WHILE($A_DBB[14]==0);未松开
+			G4 F0.2
+		ENDWHILE
+		G4 F1
+;
+		MSG("螺旋升角到位中"); ifIsCHS
+		G90 G01 A=INI[20] F=INI[60]
+		STOPRE
+		G4 F0.5
+		M36;夹紧
+		G4 F1
+		M74;液压关 ifCloseHydrauilc
+	ENDIF
+ENDIF
+
+RET
+

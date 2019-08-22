@@ -1,0 +1,16 @@
+PROC F_C_MODIFY_BY_Z(REAL Z_VALUE) DISPLOF
+;***********程序功能**********
+;*调整Z修改C初始角
+;Z_VALUE:Z调整量，区分正负
+;****************************
+
+IF INI[0]==1;左旋
+	TOOL_SET[4]=TOOL_SET[4]-Z_VALUE/INI[5]*360
+ELSE
+	TOOL_SET[4]=TOOL_SET[4]+Z_VALUE/INI[5]*360;Z轴偏刀调整
+ENDIF
+
+F_ANG_WITHIN_360(TOOL_SET[4]);将角度调整到0-360内
+
+RET
+

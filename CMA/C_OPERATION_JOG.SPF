@@ -1,0 +1,61 @@
+PROC C_OPERATION_JOG DISPLOF
+;***********程序功能**********
+;*螺纹手动对刀
+;****************************
+
+;*********************
+;
+;*********************
+
+
+DDD0:
+;
+MSG("正在开至工件起点"); ifIsCHS
+;*********************
+;
+F_Z_POSITION(INI[28]);内螺纹  ifIsInternal
+;*********************
+GOTOF DDD3
+
+;*********************
+;
+;*********************
+
+DDD3:
+;
+MSG("X轴开至对刀起始位"); ifIsCHS
+G01 G90 X=INI[10] F=INI[55];X开至对刀起始位
+
+;*********************
+F_Z_POSITION(INI[6]);内螺纹  ifIsInternal
+;*********************
+
+;ifIsNotCenterBegin
+IF TOOL_SET[57]==0;首件工件
+    G90 G01 C=ACP(0) F=INI[58];0度对刀
+;
+;
+ELSE;非首件
+    G90 G01 C=ACP(TOOL_SET[4]) F=INI[58];C轴起始角对刀
+ENDIF
+;ifIsNotCenterEnd
+
+;
+
+STOPRE
+TOOL_SET[5]=$AA_IM[C];读取C轴初始角度 
+TOOL_SET[0]=$AA_IM[Z];读取对刀开始时Z轴坐标
+
+;
+MSG("手动对刀已启动,请进行对刀操作"); ifIsCHS
+IF INI[109]==0;对刀模式(zc插补0/静止对刀1)
+    F_ZC_START(TOOL_SET[0],INI[7],INI[5],INI[80],1)
+ELSE
+    M0
+    STOPRE
+    R280=$AA_IM[X]
+    R281=$AA_IM[Z]
+ENDIF
+
+RET
+

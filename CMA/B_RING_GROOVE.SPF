@@ -1,0 +1,68 @@
+PROC B_RING_GROOVE DISPLON
+;**********程序功能**********
+;*环形槽
+;****************************
+
+IF $A_DBB[0]<>0;修整
+    B_SCREW;磨削主程序
+    GOTOF RING_ENDING
+ENDIF
+
+IF $A_DBB[1]<>0;手动对刀
+    RET
+ENDIF
+
+IF $A_DBB[5]<>0;自动对刀
+    RET
+ENDIF
+
+INI[0]=0;右旋
+INI[26]=1;批量磨削
+WORK[0]=1;头数
+INI[17]=0;螺旋升角置零
+INI[18]=0;螺旋升角置零
+INI[19]=0;螺旋升角置零
+
+RING[4]=RING[3]-RING[2]+1;需加工槽数
+RING[5]=0;已加工槽数
+
+WHILE(RING[5]<RING[4]);已加工小于需加工
+    C_RING_RELATED_POS(RING[2]+RING[5],RING[6],RING[7]);当前槽的XZ方向偏移量计算
+    B_SCREW;磨削主程序
+    IF (DRESSER[6]<>0) OR ($A_DBB[2]==1);有报警/按下退刀键则退出程序
+        GOTOF RING_ENDING
+    ENDIF
+    STOPRE
+    RING[5]=RING[5]+1;已加工槽数
+    STOPRE
+ENDWHILE
+
+IF INI[26]<>0;0是单件磨削模式,1是批量磨削模式
+    INI[73]=INI[73]+1;磨削工件计数
+ENDIF
+
+IF (INI[74]<>0) AND (INI[73]>=INI[74]);磨削几件后修整不为零或当前几件大于设定值
+    IF INI[73]/INI[74]-TRUNC(INI[73]/INI[74])==0
+        INI[75]=1;标记位
+    ENDIF
+ENDIF
+
+RING_ENDING:
+DO MOV[C]=1 FA[C]=3600
+G4 F0.5
+DO MOV[C]=0;停止c轴旋转
+M9;内磨削冷却关
+M29;修整冷却关
+M57;退刀关
+F_GRINDWHEEL_STOP;砂轮停止
+F_DRESSWHEEL_STOP;修整轮停止
+IF (INI[70]==1) AND (GRIND[2]<>2);有自动门(0没有/1有)
+    M47;罩壳门打开
+    WHILE($A_DBB[9]==0);等待罩壳门打开
+        G4 F0.2
+    ENDWHILE
+ENDIF
+C_ALARM;机床报警
+
+RET
+

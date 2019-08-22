@@ -1,0 +1,17 @@
+PROC F_DRESSWHEEL_STOP DISPLOF
+;***********程序功能**********
+;*修整轮停止
+;****************************
+
+IF (INI[37]==0) OR (INI[37]==2);修整轮类型选择
+    M65
+ELSE
+    IF (INI[36]==0) OR (INI[36]==2)
+        M1=5
+    ELSE
+        M2=5
+    ENDIF
+ENDIF
+
+RET
+

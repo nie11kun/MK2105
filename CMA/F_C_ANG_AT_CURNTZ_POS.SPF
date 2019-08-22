@@ -1,0 +1,26 @@
+PROC F_C_ANG_AT_CURNTZ_POS(REAL ZPOSITION,VAR REAL C_ANG) DISPLOF
+;***********程序功能**********
+;*当前z位置下的C角度
+;ZPOSITION:z当前位置
+;C_ANG:c角度
+;****************************
+
+DEF REAL DR1,DR2,DR3
+
+DR1=ABS(ZPOSITION-INI[6]);计算对刀点到起始点的距离
+DR2=DR1/INI[5]
+DR3=(DR2-TRUNC(DR2))*360;起点到对刀点C轴等效旋转角度
+IF GRIND[0]<>1;不是内螺纹
+	C_ANG=TOOL_SET[4]+DR3
+ELSE
+	IF INI[0]==1;左旋
+		C_ANG=TOOL_SET[4]-DR3
+	ELSE
+		C_ANG=TOOL_SET[4]+DR3
+	ENDIF
+ENDIF
+
+F_ANG_WITHIN_360(C_ANG);将角度调整到0-360内
+
+RET
+

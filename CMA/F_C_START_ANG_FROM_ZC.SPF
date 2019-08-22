@@ -1,0 +1,26 @@
+PROC F_C_START_ANG_FROM_ZC(REAL ZPOSITION,REAL C_ANG) DISPLOF
+;***********程序功能**********
+;*根据当前zc，推算初始c
+;ZPOSITION:z当前位置
+;C_ANG:c角度
+;****************************
+
+DEF REAL DR1,DR2,DR3
+
+DR1=ABS(ZPOSITION-INI[6]);当前位置到起始点的距离
+DR2=DR1/INI[5]
+DR3=(DR2-TRUNC(DR2))*360
+IF GRIND[0]<>1;不是内螺纹
+	TOOL_SET[4]=C_ANG-DR3
+ELSE
+	IF INI[0]==1;左旋
+		TOOL_SET[4]=C_ANG+DR3
+	ELSE
+		TOOL_SET[4]=C_ANG-DR3
+	ENDIF
+ENDIF
+
+F_ANG_WITHIN_360(TOOL_SET[4]);将角度调整到0-360内
+
+RET
+

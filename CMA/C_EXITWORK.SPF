@@ -1,0 +1,28 @@
+PROC C_EXITWORK DISPLOF
+;***********程序功能**********
+;*退出工件动作
+;****************************
+
+;
+MSG("退刀中,请勿复位程序!"); ifIsCHS
+IF GRIND[0]<>1;不是内螺纹
+    IF GRIND[2]<>2;不对刀,手动,或自动+手动
+        G01 G90 X=INI[23] F=INI[54];退刀时的X值
+    ENDIF
+ELSE
+    IF GRIND[2]<>2;不对刀,手动,或自动+手动
+        G90 G01 X=INI[10] F=PROCESS[11]*4;X离开螺纹,已清除XDRF值
+        IF INI[84]==0;内螺纹是否螺旋退出工件(0否1是)
+            G90 G01 Z=INI[6] F=INI[56];返回起点
+        ELSE
+            F_ZC_START(INI[7],INI[6],INI[5],INI[135]*INI[5],0)
+        ENDIF
+        G90 G01 Z=INI[28] F=INI[56];Z轴到工件右端偏右一位置
+        G90 G01 X=INI[23] F=INI[54]
+    ELSE
+        G90 G01 Z=INI[28] F=INI[56];Z轴到工件右端偏右一位置 ifIsNotCenter
+    ENDIF
+ENDIF
+
+RET
+

@@ -1,0 +1,263 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset="UTF-8"/>
+        <title>滚轮界面</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    </head>
+    
+    <body>
+        <div class="head1"><a href="index.html">HMI界面参数定义</a>
+            <hr>
+            <div class="head2">滚轮界面
+                <hr>
+                <p>具体操作步骤请参考<a href="section_10.html" class="highlight">修整</a></p>
+                <hr>
+                
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D4">修整轮直径</a></td>
+                            <td>推荐设置：查看滚轮图纸</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        查看滚轮图纸输入参数，此参数影响滚轮转速，所以务必输入准确<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D5">修整轮线速度</a></td>
+                            <td>推荐设置：15m/s</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>小于滚轮最大额定转速</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        修整时滚轮的线速度，合适的砂轮和滚轮的线速度对于最终的修整质量有很大影响<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D1">圆弧半径</a></td>
+                            <td>推荐设置：根据滚轮图纸</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        查看滚轮图纸，输入滚轮圆弧半径大小<br>
+                    </p>
+                </div>
+
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D2">初始接触位置</a></td>
+                            <td>推荐设置：手动测量</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        安装新砂轮后，开动V轴使滚轮接触砂轮顶点后，记录当前V轴坐标到此<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D3">当前接触位置</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数表示当前砂轮和滚轮接触时候的V轴坐标<br>
+                        当修整界面砂轮状态为旧砂轮时，修整从此位置开始<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D6">修整中心</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>根据计算结果设置</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数影响修整左右位置<br>
+                        计算方法:
+                            单滚轮：开动机床用滚轮左右侧面接触砂轮左右面，记录两个坐标W1，W2 <br>
+                            修整中心=(W1+W2)/2 <br>
+                    </p>
+                </div>
+ 
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D7">方滚轮厚度</a></td>
+                            <td>推荐设置：查看图纸</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        根据滚轮图纸输入参数，此参数的大小会影响齿形的宽度<br>
+                    </p>
+                </div>
+
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D8">双滚轮间距</a></td>
+                            <td>推荐设置：查看图纸</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        根据滚轮图纸输入参数，此参数的大小会影响齿形的宽度<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D9">左右轮高低差</a></td>
+                            <td>推荐设置：根据测量结果</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        根据测量结果补偿左右轮高低差，左高右低输入正，左低右高输入负<br>
+                    </p>
+                </div>
+
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D10">停留时间</a></td>
+                            <td>推荐设置：1S</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        滚压轮进给接触砂轮后，停留时间<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D11">齿高</a></td>
+                            <td>推荐设置：根据滚轮图纸</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        根据滚轮图纸，设置齿高<br>
+                    </p>
+                </div>
+
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D12">修整中心距</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>根据计算结果设置</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数影响修整前后起始位置<br>
+                        计算方法:安装新砂轮到磨杆，测量当前砂轮直径D1, 输入到修整界面新砂轮直径里<br>
+                                根据滚轮图纸标识，将滚轮直径D2输入滚轮界面<br>
+                                移动机床将砂轮接触滚轮外沿，记录当前X轴坐标X1<br>
+                                修整中心距=绝对值(X1+D1/2+D2/2)<br>
+                                设置后观察滚轮界面的初始接触值是否等于X1，如果相等则修整中心距设置正确<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D13">修整中心</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>根据计算结果设置</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数影响修整左右位置<br>
+                        计算方法:
+                            单滚轮：开动机床用滚轮左右侧面接触砂轮左右面，记录两个坐标Z1，Z2 <br>
+                            修整中心=(Z1+Z2)/2 <br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D14">初始接触位置</a></td>
+                            <td>推荐设置：手动测量</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        安装新砂轮后，设置正确修整中心距后，初始接触位置为自动计算值<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S4D15">当前接触位置</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数表示当前砂轮和滚轮接触时候的X轴坐标<br>
+                        当修整界面砂轮状态为旧砂轮时，修整从此位置开始<br>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

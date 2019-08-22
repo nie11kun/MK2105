@@ -1,0 +1,24 @@
+PROC E_DOUBLEGRIND_XBACK(REAL POSITION) DISPLOF
+;***********程序功能**********
+;*双向磨削后x后退情况
+;POSITION:X后退位置
+;****************************
+
+IF WORK[0]<>1;头数不等于1,需要换头时,砂轮退出
+;
+	MSG("换头,砂轮退出工件"); ifIsCHS
+	G90 G01 X=POSITION-$AC_DRF[X] F=PROCESS[11]*4;换头时,X退刀,返回起点
+ENDIF
+IF PROCESS[3]==1;需要修整,砂轮退出工件
+;
+	MSG("砂轮正在退出工件"); ifIsCHS
+	G90 G01 X=POSITION-$AC_DRF[X] F=PROCESS[11]*4;双向磨削结束,需要修砂轮,X退刀
+ENDIF
+IF(TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==TECHNOLOGY[10]+TECHNOLOGY[11]+TECHNOLOGY[12]+TECHNOLOGY[13]+DIY[1])		
+;
+	MSG("砂轮正在退出工件");双向磨削结束,次数已到设定次数,X退刀 ifIsCHS
+	G90 G01 X=POSITION-$AC_DRF[X] F=PROCESS[11]*4
+ENDIF
+
+RET
+

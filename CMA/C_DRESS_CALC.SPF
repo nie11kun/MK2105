@@ -1,0 +1,57 @@
+PROC C_DRESS_CALC SBLOF DISPLOF
+;***********程序功能**********
+;*修整次数循环累加:
+;*修整次数累加，粗精修切换，赋值
+;****************************
+
+IF DRESSER[20]<DRESSER[13];抬刀部分当前次数判断
+    DRESSER[20]=DRESSER[20]+1;次数累积
+    IF DRESSER[11]<>0;抬刀部分按粗修还是精修
+        IF DRESSER[133]==0;新砂轮修整模式(0抬齿高/1偏半个砂轮宽度)
+            D_DRESS_TOUCH_CURNT(DRESSER[14]);当前接触位置
+        ELSE
+            D_DRESS_HORI_CURNT(DRESSER[14]);新砂轮修整模式1下当前左右修整位置
+        ENDIF
+        DRESSER[10]=DRESSER[16];修整速度赋值
+;
+        MSG("轮廓初始修型中-->正在进行第"<<DRESSER[20]<<"次,还剩"<<DRESSER[13]-DRESSER[20]<<"次完成,进给量:"<<DRESSER[14]<<"mm"); ifIsCHS
+    ELSE
+        IF DRESSER[133]==0;新砂轮修整模式(0抬齿高/1偏半个砂轮宽度)
+            D_DRESS_TOUCH_CURNT(DRESSER[15]);当前接触位置
+        ELSE
+            D_DRESS_HORI_CURNT(DRESSER[15]);新砂轮修整模式1下当前左右修整位置
+        ENDIF
+        DRESSER[10]=DRESSER[17]
+;
+        MSG("轮廓初始修型中-->正在进行第"<<DRESSER[20]<<"次,还剩"<<DRESSER[13]-DRESSER[20]<<"次完成,进给量:"<<DRESSER[15]<<"mm"); ifIsCHS
+    ENDIF
+ELSE
+    IF DRESSER[18]<DRESSER[11]
+        DRESSER[18]=DRESSER[18]+1
+        D_DRESS_TOUCH_CURNT(DRESSER[14]);当前接触位置
+        DRESSER[10]=DRESSER[16]
+
+        PROCESS[13]=PROCESS[13]-DRESSER[14];初始进刀位置计算
+        PROCESS[4]=PROCESS[4]-DRESSER[14];当前进刀位置计算
+
+;
+        MSG("粗修整中-->正在进行第"<<DRESSER[18]<<"次,还剩"<<DRESSER[11]-DRESSER[18]<<"次完成,进给量:"<<DRESSER[14]<<"mm"); ifIsCHS
+    ELSE
+        IF DRESSER[19]<DRESSER[12]
+            DRESSER[19]=DRESSER[19]+1
+            D_DRESS_TOUCH_CURNT(DRESSER[15]);当前接触位置
+            DRESSER[10]=DRESSER[17]
+
+            PROCESS[13]=PROCESS[13]-DRESSER[15];初始进刀位置计算
+            PROCESS[4]=PROCESS[4]-DRESSER[15];当前进刀位置计算
+
+;
+            MSG("精修整中-->正在进行第"<<DRESSER[19]<<"次,还剩"<<DRESSER[12]-DRESSER[19]<<"次完成,进给量:"<<DRESSER[15]<<"mm"); ifIsCHS
+        ELSE
+            DRESSER[19]=DRESSER[19]+1
+        ENDIF
+    ENDIF
+ENDIF
+
+RET
+

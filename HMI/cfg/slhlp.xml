@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE CONFIGURATION>
+<CONFIGURATION>
+    <OnlineHelpFiles>
+        <custom_help>
+            <EntriesFile value="user_guide.xml" type="QString"/>
+            <DisableIndex value="true" type="bool"/>
+        </custom_help>
+    </OnlineHelpFiles>
+</CONFIGURATION>

@@ -1,0 +1,37 @@
+PROC C_DRESS_CHOICE SBLOF DISPLOF
+;***********程序功能**********
+;*修整选择及参数赋值:
+;*判读纯修整砂轮还是磨削中修整，新砂轮修整自动计算修整次数修整到最大磨削直径，磨削中修整调用精修部分
+;****************************
+
+IF GRIND[1]<>0;纯修整
+    IF (DRESSER[5]==0)AND(GRIND[0]==1);内螺纹新砂轮修整时精确计算成型尺寸
+        DRESSER[11]=ROUNDUP(((DRESSER[23]-DRESSER[49])/2-DRESSER[28]*5)/DRESSER[27])
+        IF DRESSER[11]*DRESSER[27]>=(DRESSER[23]-DRESSER[49])/2
+            DRESSER[11]=DRESSER[11]-1
+        ENDIF
+        DRESSER[12]=ROUNDUP(((DRESSER[23]-DRESSER[49])/2-DRESSER[11]*DRESSER[27])/DRESSER[28])
+    ELSE
+        DRESSER[11]=DRESSER[25];粗修次数
+        DRESSER[12]=DRESSER[26];精修次数
+    ENDIF
+    DRESSER[14]=DRESSER[27];粗修进给
+    DRESSER[15]=DRESSER[28];精修进给
+    DRESSER[16]=DRESSER[29];粗修速度
+    DRESSER[17]=DRESSER[30];精修速度
+    IF INI[144]==0;砂轮是否恒转速(0否1是)
+        WHEEL_LINESPEED_DRESS[0]=WHEEL_LINESPEED_DRESS[1];砂轮线速度
+    ELSE
+        WHEEL_LINESPEED_DRESS[0]=DRESSER[36];砂轮线速度
+    ENDIF
+ELSE;磨削中修整
+    DRESSER[11]=0
+    DRESSER[12]=TECH_DRESS_TIME[5]
+    DRESSER[14]=0
+    DRESSER[15]=TECH_DRESS_DEEP[0]
+    DRESSER[16]=0
+    DRESSER[17]=TECH_DRESS_FEED[0]
+    WHEEL_LINESPEED_DRESS[0]=WHEEL_LINESPEED_DRESS[2]
+ENDIF
+RET
+

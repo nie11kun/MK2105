@@ -1,0 +1,276 @@
+PROC C_PAR_INI SBLOF DISPLOF
+;***********程序功能**********
+;*参数初始化:
+;*各种参数初始化赋值，判断及运算
+;****************************
+
+DRFOF;手轮偏置清除
+
+;参数初始赋值
+DRESSER[6]=0;报警标记取消
+PROCESS[3]=0;修整标记清零
+PROCESS[7]=0;当前磨削是否修整累计
+TECH_TIME[0]=0;当前粗磨次数
+TECH_TIME[1]=0;当前半粗磨次数
+TECH_TIME[2]=0;当前半精磨次数
+TECH_TIME[3]=0;当前精磨次数
+TECH_TIME[4]=0;当前DIY次数
+INI[25]=1;退刀计算标志位置1
+WORK[1]=0;当前磨削头数
+DRESSER[38]=0;界面工艺修整量总量
+TOOL_SET[40]=0;是否已执行过二次对刀的标记
+INI[72]=0;磨削中进行过修整后的标记
+R270=0;同步动作取消标记
+
+;非蜗杆磨床时对存储齿形程序的变量赋值
+IF GRIND[0]<>2;非蜗杆
+	IF (DRESSER[0]==0) OR (DRESSER[0]==1);VW/XZ
+		IF DRESSER[114]==0;是否使用通用齿形程序(0否1是)
+			IF DRESSER[4]==0;齿形选择(0三角/1梯形/2双圆弧)
+				SHAPE="D_TRIANGLE"
+			ELSE
+				IF DRESSER[4]==1
+					SHAPE="D_TRAPEZOIDAL"
+				ELSE
+					SHAPE="D_DOUBLE_ARC"
+				ENDIF
+			ENDIF
+		ELSE
+			SHAPE="D_COMMON_SHAPE"
+			IF DRESSER[4]==0;三角
+				WHICH_COMMON_SHAPE="F_COMMON_SHAPE_8"
+			ELSE
+				IF DRESSER[4]==1;梯形
+					WHICH_COMMON_SHAPE="F_COMMON_SHAPE_7"
+				ELSE
+					IF DRESSER[4]==2;双圆弧
+						WHICH_COMMON_SHAPE="F_COMMON_SHAPE_6"
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ELSE
+		IF (DRESSER[0]==2) OR (DRESSER[0]==4);2滚压V/4滚压X
+			SHAPE="D_ROLLING"
+		ELSE;液压
+			SHAPE="D_HYDRAULIC"
+		ENDIF
+	ENDIF
+ELSE;蜗杆
+	IF INI[86]==0;蜗杆修整时用蜗杆齿形0还是螺纹齿形1
+		SHAPE=WORM_SHAPE
+	ELSE
+		SHAPE="D_COMMON_SHAPE"
+		WHICH_COMMON_SHAPE="F_COMMON_SHAPE_7"
+	ENDIF
+ENDIF
+
+GRIND[1]=$A_DBB[0];是否修整
+
+IF INI[69]==0;无自动对刀
+	GRIND[2]=$A_DBB[1];是否对刀
+ELSE
+	IF TOOL_SET[68]==0;磨削中心：自动对刀标记
+		IF ($A_DBB[1]==0) AND ($A_DBB[5]==0)
+			GRIND[2]=0;不对刀
+		ELSE
+			IF ($A_DBB[1]==1) AND ($A_DBB[5]==0)
+				GRIND[2]=1;手动对刀
+			ELSE
+				IF ($A_DBB[1]==0) AND ($A_DBB[5]==1)
+					GRIND[2]=2;自动对刀(只计算C角度)
+					TOOL_SET[8]=0;首次对刀
+				ELSE
+					IF ($A_DBB[1]==1) AND ($A_DBB[5]==1)
+						GRIND[2]=2;自动对刀(只计算C角度)
+						TOOL_SET[8]=0;首次对刀
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ELSE
+		GRIND[2]=0;不对刀
+		TOOL_SET[68]=0;自动对刀标记复位
+	ENDIF
+ENDIF
+
+IF INI[69]==1;有自动对刀(0没有/1有)
+	IF (GRIND[2]==0) OR (GRIND[2]==1);不对刀或手动对刀过程
+		IF TOOL_SET[31]==1;自动对刀是否有接近开关测量机构
+			F_PROBE_M_BACK(TOOL_SET[51]);接近开关退回
+			F_PROBE_DBB_BACK(TOOL_SET[51]);等待接近开关缩回
+		ENDIF
+		IF TOOL_SET[49]==1;自动对刀是否有测量头测量结构
+			F_PROBE_M_BACK(TOOL_SET[52]);测量头退回
+			F_PROBE_DBB_BACK(TOOL_SET[52]);等待测量头缩回
+		ENDIF
+	ENDIF
+ENDIF
+
+IF INI[70]==1;有自动门(0没有/1有)
+	IF (GRIND[2]==0) OR (GRIND[2]==2);不对刀或自动对刀(只计算C角度)
+		M48;罩壳门关闭
+		WHILE($A_DBB[10]==0);等待罩壳门关闭
+			G4 F0.2
+		ENDWHILE
+	ENDIF
+ENDIF
+
+IF (INI[74]==0) OR (INI[73]<INI[74]);修整为零或当前几件小于设定值
+    INI[75]=0;标记位
+ENDIF
+
+IF INI[47]==1;磨削中不正常退出标记
+	PROCESS[4]=PROCESS[4]+PROCESS[8];当前磨削位回退
+	INI[47]=0;磨削中不正常退出标记
+ENDIF
+
+;新砂轮时磨削初始和当前接触
+IF GRIND[1]==1;修整
+	IF (DRESSER[5]==0) AND (INI[40]==0);砂轮为新砂轮
+		IF GRIND[0]<>1;不是内螺纹
+			PROCESS[13]=PROCESS[13]+(WHEEL[12]-WHEEL[10]);新砂轮接触工件位置等于初始接触加上当前与初始接触修整轮距离(如果相减为负则说明新砂轮直径小于当前旧砂轮)
+			PROCESS[4]=PROCESS[4]+(WHEEL[12]-WHEEL[10])
+		ELSE
+			IF DRESSER[37]==0;前/后修整
+				PROCESS[13]=PROCESS[13]+(WHEEL[10]-WHEEL[12]);新砂轮接触工件位置等于初始接触加上当前与初始接触修整轮距离(如果相减为负则说明新砂轮直径小于当前旧砂轮)
+				PROCESS[4]=PROCESS[4]+(WHEEL[10]-WHEEL[12])
+			ELSE
+				PROCESS[13]=PROCESS[13]+(WHEEL[12]-WHEEL[10])
+				PROCESS[4]=PROCESS[4]+(WHEEL[12]-WHEEL[10])
+			ENDIF
+		ENDIF
+		INI[40]=1;新砂轮磨削接触位计算标记
+		INI[77]=DRESSER[23];当前新砂轮直径缓存
+	ELSE
+		IF (DRESSER[5]==0) AND (INI[40]==1);砂轮为新砂轮,上次未正确修整结束
+			IF DRESSER[113]==0;新砂轮是否是成型砂轮(0否1是)
+				IF (DRESSER[13]<>0);有轮廓
+					IF DRESSER[20]==DRESSER[13];轮廓已修完
+						PROCESS[13]=PROCESS[13]+ABS(WHEEL[12]-WHEEL[10])
+						PROCESS[4]=PROCESS[4]+ABS(WHEEL[12]-WHEEL[10])
+					ELSE;未修完
+						PROCESS[13]=PROCESS[13]+(DRESSER[23]-INI[77])/2;当前输入的新砂轮直径和上次的不一样，将差值导入磨削接触位
+						PROCESS[4]=PROCESS[4]+(DRESSER[23]-INI[77])/2
+						INI[77]=DRESSER[23];当前新砂轮直径缓存
+					ENDIF
+				ELSE;无轮廓-齿高设为0
+					PROCESS[13]=PROCESS[13]+ABS(WHEEL[12]-WHEEL[10])
+					PROCESS[4]=PROCESS[4]+ABS(WHEEL[12]-WHEEL[10])
+				ENDIF
+			ELSE
+				PROCESS[13]=PROCESS[13]+ABS(WHEEL[12]-WHEEL[10])
+				PROCESS[4]=PROCESS[4]+ABS(WHEEL[12]-WHEEL[10])
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+
+;螺旋升角值
+IF INI[0]==0;右旋
+	INI[20]=-(INI[17]+INI[18]/60+INI[19]/3600);计算升角值
+ELSE
+	INI[20]=INI[17]+INI[18]/60+INI[19]/3600;计算升角值
+ENDIF
+
+;工件磨削起点/终点
+IF GRIND[0]==1;是内螺纹磨削
+	INI[6]=INI[2]-RING[7];工件右端
+	INI[7]=INI[1];工件左端
+ELSE;不是内螺纹磨削
+	IF INI[0]==1;左旋
+		INI[6]=INI[1];工件左端
+		INI[7]=INI[2];工件右端
+	ELSE;右旋
+		INI[6]=INI[2]-RING[7];工件右端
+		INI[7]=INI[1];工件左端
+	ENDIF
+ENDIF
+
+INI[3]=INI[2]-INI[1];磨削长度
+INI[5]=WORK[0]*INI[4];导程
+INI[9]=360*(INI[3]-INI[24])/INI[5];磨削总角度
+INI[8]=(INI[2]+INI[1])/2;磨削中点
+
+;锥度相关计算,内螺纹大头往小头磨,外螺纹小头往大头磨
+INI[15]=INI[3]*INI[14]+INI[141];X方向的增量+补偿值
+
+;X轴初始接触赋值位置选择
+IF PROCESS[0]==0;选择界面工艺时执行判断,选择DIY时在DIY内执行判断
+	PROCESS[2]=0;当前工艺
+	IF INI[26]<>0;0是单件磨削模式,1是批量磨削模式
+		PROCESS[4]=PROCESS[13]+RING[6];磨削位置当前等于初始
+		PROCESS[14]=0;工艺累积进刀清零
+	ENDIF
+ELSE
+	PROCESS[2]=4;当前工艺
+ENDIF
+
+TECHNOLOGY[140]=TECHNOLOGY[60]*INI[4]*WORK[0];磨削速度计算
+TECHNOLOGY[141]=TECHNOLOGY[61]*INI[4]*WORK[0];磨削速度计算
+TECHNOLOGY[142]=TECHNOLOGY[62]*INI[4]*WORK[0];磨削速度计算
+TECHNOLOGY[143]=TECHNOLOGY[63]*INI[4]*WORK[0];磨削速度计算
+
+TECHNOLOGY[200]=TECHNOLOGY[267]*INI[4]*WORK[0];磨削速度计算
+TECHNOLOGY[201]=TECHNOLOGY[268]*INI[4]*WORK[0];磨削速度计算
+TECHNOLOGY[202]=TECHNOLOGY[269]*INI[4]*WORK[0];磨削速度计算
+TECHNOLOGY[203]=TECHNOLOGY[270]*INI[4]*WORK[0];磨削速度计算
+
+;报警判断
+IF (INI[3]<=0) AND (RING[0]==0);磨削长度<=0 且不是环形槽磨削
+	DRESSER[6]=1;工件左端坐标>工件右端坐标
+ENDIF
+
+IF (PROCESS[0]==0) AND (GRIND[1]==0) AND (GRIND[2]==0);选择界面工艺不是对刀不是修整,界面工艺修整量总量
+	IF PROCESS[15]==0;基本工艺
+		IF INI[75]==1;磨削几件后修整标记位
+			DRESSER[38]=DRESSER[38]+DRESSER[26]*DRESSER[28]
+		ENDIF
+		IF (TECHNOLOGY[10]<>0) AND (TECHNOLOGY[40]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[10]/TECHNOLOGY[40])*DRESSER[26]*DRESSER[28]
+		ENDIF
+		IF (TECHNOLOGY[11]<>0) AND (TECHNOLOGY[41]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[11]/TECHNOLOGY[41])*DRESSER[26]*DRESSER[28]
+		ENDIF
+		IF (TECHNOLOGY[12]<>0) AND (TECHNOLOGY[42]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[12]/TECHNOLOGY[42])*DRESSER[26]*DRESSER[28]
+		ENDIF
+		IF (TECHNOLOGY[13]<>0) AND (TECHNOLOGY[43]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[13]/TECHNOLOGY[43])*DRESSER[26]*DRESSER[28]
+		ENDIF
+	ELSE;扩展工艺
+		IF (TECHNOLOGY[10]<>0) AND (TECHNOLOGY[40]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[10]/TECHNOLOGY[40])*TECH_DRESS_TIME[0]*TECH_DRESS_DEEP[1]
+		ENDIF
+		IF (TECHNOLOGY[11]<>0) AND (TECHNOLOGY[41]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[11]/TECHNOLOGY[41])*TECH_DRESS_TIME[1]*TECH_DRESS_DEEP[2]
+		ENDIF
+		IF (TECHNOLOGY[12]<>0) AND (TECHNOLOGY[42]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[12]/TECHNOLOGY[42])*TECH_DRESS_TIME[2]*TECH_DRESS_DEEP[3]
+		ENDIF
+		IF (TECHNOLOGY[13]<>0) AND (TECHNOLOGY[43]<>0)
+			DRESSER[38]=DRESSER[38]+TRUNC(TECHNOLOGY[13]/TECHNOLOGY[43])*TECH_DRESS_TIME[3]*TECH_DRESS_DEEP[4]
+		ENDIF
+	ENDIF
+ENDIF
+
+IF DRESSER[24]-DRESSER[38]*2<DRESSER[35];当前砂轮直径<最小砂轮直径
+	DRESSER[6]=2;砂轮过小,请更换砂轮
+ENDIF
+
+IF GRIND[1]==0;不再修整中
+	IF (DRESSER[24]>DRESSER[49])AND(GRIND[0]==1);当前砂轮直径>砂轮最大磨削直径,并且是内螺纹磨时
+		DRESSER[6]=3;砂轮过大,请将砂轮修整到小于最大磨削直径
+	ENDIF
+ENDIF
+
+IF (TOOL_SET[59]==1) AND (GRIND[1]==0) AND (GRIND[2]==0);变螺距且要进行磨削
+	IF (TOOL_SET[64]<INI[2]) AND (TOOL_SET[65]<TOOL_SET[64]) AND (INI[1]<TOOL_SET[65])
+
+	ELSE
+		DRESSER[6]=10;测量多段螺距结果有误
+	ENDIF
+ENDIF
+
+RET
+

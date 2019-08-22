@@ -1,0 +1,59 @@
+PROC C_OPERATION_RAND DISPLOF
+;***********程序功能**********
+;*螺纹二次对刀程序
+;****************************
+
+DEF REAL DR1,DR2,DR3,DR4
+
+;*********************
+;
+;*********************
+
+DDD0:
+;
+MSG("正在开至工件起点"); ifIsCHS
+;*********************
+;
+F_Z_POSITION(INI[28]);内螺纹  ifIsInternal
+;*********************
+GOTOF DDD3
+
+;*********************
+;
+;*********************
+
+DDD3:
+;
+MSG("X轴开至对刀起始位"); ifIsCHS
+G01 G90 X=INI[10] F=INI[55];X开至对刀起始位
+
+;*********************
+F_Z_POSITION(INI[6]);内螺纹  ifIsInternal
+;*********************
+
+STOPRE
+TOOL_SET[0]=$AA_IM[Z];读取对刀开始时Z轴坐标
+F_C_ANG_AT_CURNTZ_POS(TOOL_SET[0],DR4)
+;
+MSG("头架到位中"); ifIsCHS
+G90 G01 C=ACP(DR4) F=INI[58]
+
+;
+MSG("砂轮正在进入距离螺纹槽2mm处"); ifIsCHS
+G01 X=PROCESS[4]+ABS(TOOL_SET[0]-INI[6])*INI[14]+2 F=PROCESS[11]
+STOPRE
+TOOL_SET[40]=1;已执行过二次对刀的标记
+
+;
+MSG("二次对刀已启动,请进行对刀操作"); ifIsCHS
+IF INI[109]==0;对刀模式(zc插补0/静止对刀1)
+    F_ZC_START(TOOL_SET[0],INI[7],INI[5],INI[80],1)
+ELSE
+    M0
+    STOPRE
+    R280=$AA_IM[X]
+    R281=$AA_IM[Z]
+ENDIF
+
+RET
+

@@ -1,0 +1,54 @@
+PROC PLCASUP1 DISPLOF
+;***********程序功能**********
+;*退刀及角度计算程序:
+;*首次对刀 手动对刀 自动对刀 二次对刀 下的C角度及X初始位计算，退刀键的回退动作
+;****************************
+
+DEF REAL DR11,DR12,DR13
+
+IF INI[25]==0;不在磨削程序中退刀就不进行C角度计算
+	GOTOF X_BACK
+ENDIF
+
+STOPRE
+TOOL_SET[3]=R280;对刀完成后x轴坐标(用于磨削初始进刀位)
+TOOL_SET[21]=R281;手动对刀完成后Z轴坐标
+TOOL_SET[2]=$AC_DRF[Z];对刀完成时手轮偏置值
+TOOL_SET[20]=$AC_DRF[X];对刀完成时手轮偏置值
+
+IF TOOL_SET[8]==0;首次对刀
+	IF GRIND[2]==1;手动对刀
+		F_C_START_ANG_FROM_ZC(TOOL_SET[0],TOOL_SET[5])
+		F_C_MODIFY_BY_Z(TOOL_SET[2]);调整值
+		TOOL_SET[3]=TOOL_SET[3]-ABS(TOOL_SET[21]-INI[6])*INI[14]
+		IF TOOL_SET[57]==0;首件对刀赋值
+			PROCESS[13]=TOOL_SET[3];砂轮初始磨削进刀位赋值
+		ENDIF
+		PROCESS[4]=PROCESS[13];当前等于初始
+	ENDIF
+	TOOL_SET[8]=1;改为二次对刀
+	PROCESS[14]=0;工艺累积进刀清零
+ELSE;非首次对刀
+	IF TOOL_SET[40]<>0;二次对刀标记
+		PROCESS[13]=PROCESS[13]+TOOL_SET[20]+2
+		PROCESS[4]=PROCESS[4]+TOOL_SET[20]+2;二次对刀X计算
+		TOOL_SET[40]=0;标记复位,对刀后直接进入磨削时跳转到下面的情况
+	ELSE;磨削中调整
+		PROCESS[13]=PROCESS[13]+TOOL_SET[20];磨削过程中调整X
+		PROCESS[4]=PROCESS[4]+TOOL_SET[20];磨削过程中调整X
+	ENDIF
+	F_C_MODIFY_BY_Z(TOOL_SET[2]);调整值
+ENDIF
+
+F_ANG_WITHIN_360(TOOL_SET[4])
+
+STOPRE
+DRFOF
+
+X_BACK:
+IF $A_DBB[2]==1;按下退刀键
+	C_EXITWORK;退出工件范围
+ENDIF
+
+RET
+

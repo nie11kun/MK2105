@@ -1,0 +1,18 @@
+PROC C_DRESS_START DISPLOF
+;***********程序功能**********
+;*报警及参数初始化:
+;*参数初始化，提前判断本次修整是否砂轮直径过小
+;****************************
+
+DRESSER[18]=0;当前次数清零
+DRESSER[19]=0
+DRESSER[20]=0
+
+IF DRESSER[24]-(DRESSER[11]*DRESSER[14])*2-(DRESSER[12]*DRESSER[15])*2<DRESSER[35]
+	DRESSER[6]=2;砂轮过小,请更换砂轮
+	GOTOF ENDING_A
+ENDIF
+
+ENDING_A:
+RET
+

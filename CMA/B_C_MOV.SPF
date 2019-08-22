@@ -1,0 +1,24 @@
+PROC B_C_MOV DISPLOF
+;***********程序功能**********
+;*C轴旋转动作
+;****************************
+
+IF $A_DBB[6]==1;C轴旋转键选中
+    F_GRINDWHEEL_RUN(INI[81]);砂轮启动
+
+;
+    MSG("头架旋转中..."); ifIsCHS
+    IF GRIND[0]<>1;不是内螺纹
+        DO MOV[C]=1 FA[C]=INI[58];头架旋转
+    ELSE
+        DO MOV[C]=-1 FA[C]=INI[58];头架旋转
+    ENDIF
+
+    DELAY_TIME:
+    G4 F999999
+    GOTOB DELAY_TIME
+
+ENDIF
+
+RET
+

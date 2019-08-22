@@ -1,0 +1,15 @@
+PROC F_GRINDWHEEL_STOP DISPLOF
+;***********程序功能**********
+;*砂轮停止
+;****************************
+
+IF INI[79]==0
+    IF (INI[36]==0) OR (INI[36]==2);砂轮类型选择
+        M15
+    ELSE
+        M1=5
+    ENDIF
+ENDIF
+
+RET
+

@@ -1,0 +1,23 @@
+PROC D_ROLLING DISPLOF
+;***********程序功能**********
+;*滚压修整
+;****************************
+
+DEF AXIS AXIVER;垂直轴名
+
+AXIVER=AXNAME(AXIS_VER);竖直轴
+
+G90 G1 AX[AXIVER]=WHEEL[10] F=DRESSER[10];到达修整位置
+G4 F=WHEEL[18];修整接触停留中
+IF GRIND[0]<>1;不是内螺纹
+    G91 G1 AX[AXIVER]=INI[11] F=DRESSER[10];修整轮回退
+ELSE
+    IF DRESSER[37]==0;前/后修整
+        G91 G1 AX[AXIVER]=-INI[11] F=DRESSER[10];修整轮回退
+    ELSE
+        G91 G1 AX[AXIVER]=INI[11] F=DRESSER[10];修整轮回退
+    ENDIF
+ENDIF
+
+RET
+

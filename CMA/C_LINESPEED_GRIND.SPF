@@ -1,0 +1,24 @@
+PROC C_LINESPEED_GRIND SBLOF DISPLOF
+;***********程序功能**********
+;*转速:
+;*砂轮转速计算及执行
+;****************************
+
+DEF REAL WHEEL_RPM;砂轮转速
+
+D_GRINDWHEEL_DIACURNT;当前砂轮直径计算
+
+IF INI[144]==0;砂轮是否恒转速(0否1是)
+    WHEEL_RPM=PROCESS[10]*60000/($PI*DRESSER[24])
+ELSE
+    WHEEL_RPM=PROCESS[10]
+ENDIF
+
+IF WHEEL_RPM>INI[150];砂轮超过最高速度限制
+    WHEEL_RPM=INI[150]
+ENDIF
+
+F_GRINDWHEEL_RUN(WHEEL_RPM);砂轮启动
+
+RET
+

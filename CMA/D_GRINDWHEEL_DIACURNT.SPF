@@ -1,0 +1,17 @@
+PROC D_GRINDWHEEL_DIACURNT DISPLOF
+;***********程序功能**********
+;*当前砂轮直径计算
+;****************************
+
+IF GRIND[0]<>1;不是内螺纹
+    D_GRINDWHEEL_DIACRT_S(WHEEL[12],WHEEL[10]);当前砂轮直径计算
+ELSE
+    IF DRESSER[37]==0;前/后修整
+        D_GRINDWHEEL_DIACRT_S(WHEEL[10],WHEEL[12]);当前砂轮直径计算
+    ELSE
+        D_GRINDWHEEL_DIACRT_S(WHEEL[12],WHEEL[10]);当前砂轮直径计算
+    ENDIF
+ENDIF
+
+RET
+

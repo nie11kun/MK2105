@@ -1,0 +1,20 @@
+PROC E_ZHONGJIN_FIX(REAL VALUE) DISPLOF
+;***********程序功能**********
+;*中径微调:
+;VALUE:调整值
+;****************************
+
+IF GRIND[0]<>1;不是内螺纹
+	IF (VALUE>-1)AND(VALUE<1);中径微调值
+		PROCESS[4]=PROCESS[4]+VALUE/2;将中径调整值累计到X磨削起点
+		PROCESS[13]=PROCESS[13]+VALUE/2
+	ENDIF
+ELSE
+	IF (VALUE>-1)AND(VALUE<1);中径微调值
+		PROCESS[4]=PROCESS[4]-VALUE/2;将中径调整值累计到X磨削起点
+		PROCESS[13]=PROCESS[13]-VALUE/2
+	ENDIF
+ENDIF
+
+RET
+

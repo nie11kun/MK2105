@@ -1,0 +1,45 @@
+PROC D_GRIND_RING DISPLOF
+;***********程序功能**********
+;*环形槽小循环:
+;*完整磨削一个工件循环
+;****************************
+
+INI[47]=1;磨削中不正常退出标记
+
+E_ZHONGJIN_FIX(GRIND[4])
+GRIND[4]=0;清零
+
+DO MOV[C]=1 FA[C]=TECHNOLOGY[60+PROCESS[2]]*360;c轴旋转
+
+F_Z_POSITION(INI[6]);Z轴到磨削起点
+
+E_CYCLE_MESSAGE_RING
+
+IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI[72]==1);第一次磨削或者修整后的磨削
+	INI[72]=0;标记清零
+	G90 G01 X=PROCESS[4]+PROCESS[8]*2 F=500;快速到达磨削位置附近
+ENDIF
+
+G90 G01 X=PROCESS[4]+PROCESS[8] F=50;快速到达磨削位置附近
+X=PROCESS[4] F=INI[147];X进给
+
+G4 F3;
+
+IF $A_DBB[2]==1;磨削中途按下退刀,安全结束程序
+	RET
+ENDIF
+STOPRE
+
+;*********************
+;
+E_DOUBLEGRIND_XBACK(INI[10]);内螺纹  ifIsInternal
+;*********************
+IF $A_DBB[2]==1;返回起点过程中按下退刀键,安全结束程序
+	RET
+ENDIF
+
+STOPRE
+INI[47]=0;磨削中不正常退出标记
+
+RET
+

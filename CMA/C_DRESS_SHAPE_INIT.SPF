@@ -1,0 +1,156 @@
+PROC C_DRESS_SHAPE_INIT SBLOF DISPLOF
+;***********程序功能**********
+;*垂直位置计算:
+;*各种修整器结构及齿形下的新砂轮抬刀计算，修整第一点计算，新砂轮轮廓修整次数计算
+;****************************
+
+DEF REAL SHAPE_VER_REAL;新砂轮抬刀高度
+DEF REAL SHAPE_VER_REAL_L
+DEF REAL SHAPE_VER_REAL_R
+DEF REAL SHAPE_VER_REAL_FIX;考虑进给量高度
+DEF REAL SHAPE_VER_REMAINDER;旧砂轮轮廓计算次数的余数进刀量部分
+;梯形临时变量
+DEF REAL TRAP_TE1
+DEF REAL TRAP_TE2
+
+;新砂轮抬刀计算
+IF DRESSER[5]==0;新砂轮
+    IF DRESSER[113]==0;新砂轮是否是成型砂轮(0否1是)
+        IF (DRESSER[0]==0)OR(DRESSER[0]==1);vw/xz
+            IF DRESSER[133]==0;新砂轮修整模式(0抬齿高/1偏半个砂轮宽度)
+                IF DRESSER[114]==0;是否使用通用齿形程序(0否1是)
+                    CASE DRESSER[4] OF 0 GOTOF VER_0 1 GOTOF VER_1 DEFAULT GOTOF VER_2;三角/梯形/双圆弧
+
+                    VER_0:
+                    D_TaiDaoLiang;三角形新砂轮抬刀量计算
+                    SHAPE_VER_REAL_L=TRI[14]
+                    SHAPE_VER_REAL_R=TRI[14]
+                    GOTOF NEXT
+
+                    VER_1:
+                    TRAP_TE2=TRAP[8]/2-TRAP[1]*TAN(TRAP[12])-TRAP[1]*TAN(TRAP[11])
+                    TRAP_TE1=TRAP_TE2/(Tan(TRAP[12])+Tan(TRAP[11]))
+                    SHAPE_VER_REAL_L=(DRESSER[22]/2-TRAP[7] *TAN(45-TRAP[12]/2)-(TRAP_TE1+TRAP[0])*TAN(TRAP[12]))*TAN(30)+TRAP[0]+0.5
+                    SHAPE_VER_REAL_R=(DRESSER[22]/2-TRAP[6] *TAN(45-TRAP[11]/2)-(TRAP_TE1+TRAP[0])*TAN(TRAP[11]))*TAN(30)+TRAP[0]+0.5
+                    GOTOF NEXT
+
+                    VER_2:
+                    SHAPE_VER_REAL_L=(DARC[9]-DARC[14])+ABS(TAN(45)*((DRESSER[22]/2+DARC[12])-(DARC[9]+DRESSER[31])))+DRESSER[31]
+                    SHAPE_VER_REAL_R=(DARC[10]-DARC[15])+ABS(TAN(45)*((DRESSER[22]/2+DARC[13])-(DARC[10]+DRESSER[32])))+DRESSER[32]
+                    GOTOF NEXT
+
+                    ;初始修整位置及对应修整次数
+                    NEXT:
+                    IF SHAPE_VER_REAL_L>=SHAPE_VER_REAL_R
+                        SHAPE_VER_REAL=SHAPE_VER_REAL_L
+                    ELSE
+                        SHAPE_VER_REAL=SHAPE_VER_REAL_R
+                    ENDIF
+                ELSE
+                    E_COMMON_SHAPE_CACU;通用齿形参数计算程序
+                    SHAPE_VER_REAL=COMMON_VER_HEIGHT;实际齿高
+                ENDIF
+            ELSE;偏半个砂轮宽度
+                SHAPE_VER_REAL=DRESSER[22]/2
+            ENDIF
+        ELSE;成型/液压
+            SHAPE_VER_REAL=DRESSER[1];滚压轮齿高
+        ENDIF
+    ELSE
+        SHAPE_VER_REAL=0;成型砂轮不用抬刀
+    ENDIF
+ELSE;旧砂轮
+    IF DRESSER[133]==0;新砂轮修整模式(0抬齿高/1偏半个砂轮宽度)
+        IF GRIND[0]<>1;不是内螺纹
+            IF WHEEL[10]>WHEEL[12];当前大于初始，轮廓部分未完成
+                SHAPE_VER_REAL=WHEEL[10]-WHEEL[12]
+            ELSE
+                SHAPE_VER_REAL=0
+            ENDIF
+        ELSE
+            IF DRESSER[37]==0;前/后修整
+                IF WHEEL[10]<WHEEL[12]
+                    SHAPE_VER_REAL=WHEEL[12]-WHEEL[10]
+                ELSE
+                    SHAPE_VER_REAL=0
+                ENDIF
+            ELSE
+                IF WHEEL[10]>WHEEL[12]
+                    SHAPE_VER_REAL=WHEEL[10]-WHEEL[12]
+                ELSE
+                    SHAPE_VER_REAL=0
+                ENDIF
+            ENDIF
+        ENDIF
+    ELSE;偏半个砂轮宽度
+        IF DRESSER[134]>DRESSER[33]
+            SHAPE_VER_REAL=DRESSER[134]-DRESSER[33]
+            DRESSER[135]=DRESSER[34]-SHAPE_VER_REAL
+        ELSE
+            IF DRESSER[135]<DRESSER[34]
+                SHAPE_VER_REAL=DRESSER[34]-DRESSER[135]
+                DRESSER[134]=DRESSER[33]+SHAPE_VER_REAL
+            ELSE
+                SHAPE_VER_REAL=0
+            ENDIF
+        ENDIF
+    ENDIF
+ENDIF
+
+;轮廓部分次数计算,当前接触位置修复
+IF DRESSER[11]<>0;如果粗修次数不为零按粗修进给量抬刀
+    DRESSER[13]=ROUNDUP(SHAPE_VER_REAL/DRESSER[14]);新砂轮初始余量对应修整次数
+    SHAPE_VER_REAL_FIX=DRESSER[13]*DRESSER[14];实际抬刀量
+    SHAPE_VER_REMAINDER=SHAPE_VER_REAL_FIX-SHAPE_VER_REAL
+ELSE
+    DRESSER[13]=ROUNDUP(SHAPE_VER_REAL/DRESSER[15])
+    SHAPE_VER_REAL_FIX=DRESSER[13]*DRESSER[15]
+    SHAPE_VER_REMAINDER=SHAPE_VER_REAL_FIX-SHAPE_VER_REAL
+ENDIF
+
+IF DRESSER[133]==0;新砂轮修整模式(0抬齿高/1偏半个砂轮宽度)
+    IF GRIND[0]<>1;不是内螺纹
+        IF DRESSER[5]==0;新砂轮
+            WHEEL[10]=WHEEL[12]+SHAPE_VER_REAL_FIX;当前左端接触位置
+            WHEEL[11]=WHEEL[13]+SHAPE_VER_REAL_FIX;当前右端接触位置
+        ELSE
+            WHEEL[10]=WHEEL[10]+SHAPE_VER_REMAINDER;当前左端接触位置
+            WHEEL[11]=WHEEL[11]+SHAPE_VER_REMAINDER;当前右端接触位置
+        ENDIF
+    ELSE
+        IF DRESSER[37]==0;前/后修整
+            IF DRESSER[5]==0;新砂轮
+                WHEEL[10]=WHEEL[12]-SHAPE_VER_REAL_FIX;当前左端接触位置
+                WHEEL[11]=WHEEL[13]-SHAPE_VER_REAL_FIX;当前右端接触位置
+            ELSE
+                WHEEL[10]=WHEEL[10]-SHAPE_VER_REMAINDER;当前左端接触位置
+                WHEEL[11]=WHEEL[11]-SHAPE_VER_REMAINDER;当前右端接触位置
+            ENDIF
+        ELSE
+            IF DRESSER[5]==0;新砂轮
+                WHEEL[10]=WHEEL[12]+SHAPE_VER_REAL_FIX;当前左端接触位置
+                WHEEL[11]=WHEEL[13]+SHAPE_VER_REAL_FIX;当前右端接触位置
+            ELSE
+                WHEEL[10]=WHEEL[10]+SHAPE_VER_REMAINDER;当前左端接触位置
+                WHEEL[11]=WHEEL[11]+SHAPE_VER_REMAINDER;当前右端接触位置
+            ENDIF
+        ENDIF
+    ENDIF
+    DRESSER[134]=DRESSER[33];当前左端水平修整位置
+    DRESSER[135]=DRESSER[34];当前右端水平修整位置
+ELSE;偏半个砂轮宽度
+    IF DRESSER[5]==0;新砂轮
+        WHEEL[10]=WHEEL[12];当前左端垂直接触位置
+        WHEEL[11]=WHEEL[13];当前右端垂直接触位置
+        DRESSER[134]=DRESSER[33]+SHAPE_VER_REAL_FIX;当前左端水平修整位置
+        DRESSER[135]=DRESSER[34]-SHAPE_VER_REAL_FIX;当前右端水平修整位置
+    ELSE
+        WHEEL[10]=WHEEL[10];当前左端垂直接触位置
+        WHEEL[11]=WHEEL[11];当前右端垂直接触位置
+        DRESSER[134]=DRESSER[134]+SHAPE_VER_REMAINDER;当前左端水平修整位置
+        DRESSER[135]=DRESSER[135]-SHAPE_VER_REMAINDER;当前右端水平修整位置
+    ENDIF
+ENDIF
+
+RET
+

@@ -1,0 +1,163 @@
+﻿<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset="UTF-8"/>
+        <title>工艺界面</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    </head>
+    
+    <body>
+        <div class="head1"><a href="index.html">HMI界面参数定义</a>
+            <hr>
+            <div class="head2">工艺界面
+                <hr>
+                <p>具体操作步骤请参考<a href="section_12.html" class="highlight">磨削</a></p>
+                <hr>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D1">已加工</a></td>
+                            <td>推荐设置：0</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数为自动累计值<br>
+                        每在批量加工模式下完成一次磨削程序，此参数自动累加一次<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D2">修整设定</a></td>
+                            <td>推荐设置：0</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>根据工艺要求</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数设定为每磨削几件修整一次砂轮<br>
+                        通过设定此参数可以实现加工多件工件后自动修整一次砂轮的功能<br>
+                        注意：修整时调用修整界面精修参数(次数/修整量/速度)<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D3">单双磨</a></td>
+                            <td>推荐设置：单</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>单向/双向</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        当需要双向磨削的时候将此参数设置为双向，每向磨削的进刀量为总进刀量的一半<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D4">循环次数</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        根据工件磨削余量控制<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D5">进给深度</a></td>
+                            <td>推荐设置：0.005~0.05</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        根据磨削工艺要求，合理分配粗磨精磨进刀量，一般粗磨大进刀量去余量，精磨小进刀量光刀<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D6">修整设定</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        当前工艺磨削循环次数到达修整设定次数后进行一次修整<br>
+                        注意：修整时调用修整界面精修参数(次数/修整量/速度)<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D7">砂轮线速度</a></td>
+                            <td>推荐设置：25m/s</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>15~50</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        砂轮磨削线速度根据砂轮材质及工件材质不同变化较大<br>
+                        一般CBN砂轮需要较高线速度才能达到较好的磨削效果<br>
+                        具体设置方案请进行测试后设置<br>
+                    </p>
+                </div>
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D8">头架转速</a></td>
+                            <td>推荐设置：无</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>小于50转</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        头架转速越快则加工效率越高，速度越慢加工质量提高。一般粗磨以较高速度加工，精磨以较低速度加工<br>
+                    </p>
+                </div>
+
+                <!--removed-->
+
+                <div class="parameterCell">
+                    <table border="1" cellspacing="0" cellpadding="2" width="100%">
+                        <tr>
+                            <td><a class="var_mark" name="S2D10">磨削砂轮转速</a></td>
+                            <td>推荐设置：根据需要选择</td>
+                        </tr>
+                        <tr>
+                            <td>取值范围</td>
+                            <td>大于零</td>
+                        </tr>
+                    </table>
+                    <p class="parameterExplain">
+                        此参数为磨削砂轮转速<br>
+                        此选项开放输入时表示砂轮为恒转速模式<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

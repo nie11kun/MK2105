@@ -1,0 +1,107 @@
+PROC C_CYCLE DISPLON
+;***********程序功能**********
+;*螺纹磨削循环:
+;*螺纹磨削初始走位及子程序的调用,磨削中修整的调用
+;****************************
+
+IF TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==0
+    RET
+ENDIF
+
+IF INI[75]==1;磨削几件后修整标记位
+    INI[75]=0;标记位
+
+    ;********************
+    F_Z_POSITION(INI[28]);修整初始位置 内螺纹  ifIsInternal
+    ;*********************
+
+    M9;磨削冷却关
+    B_DRESS;修整
+    IF DRESSER[6]<>0;有报警标记则退出程序
+        RET
+    ENDIF
+    C_LINESPEED_GRIND;磨削时砂轮速度调节子程序
+ENDIF
+
+IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI[72]==1);第一次磨削或者修整后的磨削
+    
+    ;**********************
+    ;
+
+    ;ifIsInternalBegin
+    IF RING[0]==0;螺纹/环形槽加工
+        D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
+        G01 G90 Z=INI[6] F=INI[56]
+    ELSE
+        IF $AA_IM[X]<>INI[10];当前x轴没在中心，砂轮在外面
+            D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
+            G01 G90 Z=INI[6] F=INI[56]
+        ENDIF
+        G01 G90 Z=INI[6] F=INI[57]
+    ENDIF
+    ;ifIsInternalEnd
+    ;*********************
+
+ENDIF
+
+M8;磨削冷却开
+
+IF RING[0]==0;螺纹/环形槽加工
+;
+        D_GRIND;螺纹小循环
+;
+;
+;
+ELSE
+    D_GRIND_RING;环形槽小循环
+ENDIF
+PLCASUP1;初始角度计算
+
+IF INI[47]==0;磨削中不正常退出标记
+    PROCESS[14]=PROCESS[14]+PROCESS[8];累计工艺磨削量累计
+ENDIF
+
+IF $A_DBB[2]==1;按下退刀键跳转到结束程序
+    RET
+ENDIF
+
+;
+
+IF PROCESS[3]==1
+
+    ;********************
+    F_Z_POSITION(INI[28]);修整初始位置 内螺纹  ifIsInternal
+    ;*********************
+
+    M9;磨削冷却关
+    B_DRESS;修整
+    PROCESS[3]=0;修整标记清零
+    IF DRESSER[6]<>0;有报警标记则退出程序
+        RET
+    ENDIF
+    INI[72]=1;磨削中进行过修整后的标记
+    C_LINESPEED_GRIND;磨削时砂轮速度调节子程序
+ENDIF
+
+;
+
+IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==TECHNOLOGY[10]+TECHNOLOGY[11]+TECHNOLOGY[12]+TECHNOLOGY[13]+DIY[1]);最后一次结束
+    M9;磨削冷却关
+
+    ;*********************
+    IF RING[0]==0;螺纹/环形槽加工
+;
+        D_GRIND_INIT_POSITION(INI[28],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
+    ELSE
+        IF RING[5]==RING[4]-1;最后一槽
+;
+            D_GRIND_INIT_POSITION(INI[28],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
+        ENDIF
+    ENDIF
+
+    ;*********************
+
+ENDIF
+
+RET
+
