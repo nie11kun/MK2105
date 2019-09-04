@@ -5,7 +5,6 @@
 //M(Mask18/$85020/"panel_18_4_chs.png"/)
 
 	DEF DIAMETER_ADJ=(R///$85174,$85174,$85043,/WR2/"panel_18_29_chs.png"/"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D2");单次中径调整值
-	DEF PianDaoTiaoZheng=(R/-100,100//$85175,$85175,$85043,/WR2/"panel_18_30_chs.png"/"/NC/_N_NC_GD2_ACX/TOOL_SET[43]"/360,350,202/460,350,60//"UserGuide/section_1.html","S1D3");Z轴偏刀调整
 
 	DEF VAR1=(I/*0=$85135,1=$85136,2=$85137,3=$85138,4=$85139/1/$85134,,,/WR4//"/NC/_N_NC_GD2_ACX/GRIND[1]"/0,0,0/10,10,60/);磨削类型,生成文件用	
 
@@ -20,30 +19,14 @@
 	DEF Z_SOFTENDP=(R////WR4//"$AA_SOFTENDP[Z]"/0,0,0/0,0,0/);SOFRENDP_Z
 
 	DEF PIECE_VOLUME=(I/*0=$85166,1=$85167//$85170,$85170,,/WR2/"panel_18_17_chs.png"/"/NC/_N_NC_GD2_ACX/INI[27]"/360,10,70/460,10,80//"UserGuide/section_1.html","S1D1");单件/批量磨削方式选择
-	DEF SCREW_R=(I/*0=$85124,1=$85125//$85103,$85103,,/WR2/"panel_18_4_chs.png"/"/NC/_N_NC_GD2_ACX/INI[1]"/360,40,70/460,40,60//"UserGuide/section_1.html","S1D8");螺纹旋向
-	DEF VAR6=(I/0,50//$85102,$85102,$85051,/WR2/"panel_18_5_chs.png"/"/NC/_N_NC_GD2_ACX/WORK[1]"/360,60,202/460,60,60//"UserGuide/section_1.html","S1D9");工件头数
-	DEF VAR7=(R3/0,50//$85104,$85104,$85043,/WR2/"panel_18_6_chs.png"/"/NC/_N_NC_GD2_ACX/INI[5]"/360,80,202/460,80,60//"UserGuide/section_1.html","S1D4");工件螺距
 	DEF VAR8=(R3/-2000,2000//$85108,$85108,,/WR2/"panel_18_7_chs.png"/"/NC/_N_NC_GD2_ACX/INI[2]"/360,100,202/460,100,60/6/"UserGuide/section_1.html","S1D10");工件左端
 	DEF VAR9=(R3/-2000,2000//$85109,$85109,,/WR2/"panel_18_8_chs.png"/"/NC/_N_NC_GD2_ACX/INI[3]"/360,120,202/460,120,60/6/"UserGuide/section_1.html","S1D11");工件右端
 	DEF VAR10=(R/-500,500//$85165,$85165,,/WR2/"panel_18_9_chs.png"/"/NC/_N_NC_GD2_ACX/INI[11]"/360,150,202/460,150,60/6/"UserGuide/section_1.html","S1D28");工件中心
 	DEF X_QUIT=(R/-500,500//$85106,$85106,,/WR2/"panel_18_25_chs.png"/"/NC/_N_NC_GD2_ACX/INI[24]"/360,170,202/460,170,60/6/"UserGuide/section_1.html","S1D14");退刀位置
-	DEF PITCH_COM=(R/-500,500//$85105,$85105,$85043,/WR2/"panel_18_26_chs.png"/"/NC/_N_NC_GD2_ACX/INI[25]"/360,190,202/460,190,60//"UserGuide/section_1.html","S1D15");全长导程补偿
-	DEF C_INIT=(R/0,360//$85100,$85100,$85042,/WR2/"panel_18_22_chs.png"/"/NC/_N_NC_GD2_ACX/INI[28]"/360,220,202/460,220,60//"UserGuide/section_1.html","S1D29");头架在程序结束调整到合适角度
 	DEF Z_INIT=(R/-2000,2000//$85101,$85101,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[29]"/360,240,202/460,240,60/6/"UserGuide/section_1.html","S1D30");内螺纹时台面起始位置
 
-	DEF ZUIDU=(R4/-10,10//$85159,$85159,$85043,/WR2/"panel_18_12_chs.png"/"/NC/_N_NC_GD2_ACX/INI[15]"/360,270,202/460,270,60//"UserGuide/section_1.html","S1D16");单位长度锥度值(半径方向)
-	DEF ZUIDUBUCHANG=(R4/-1,1/0/$85113,$85113,$85043,/WR4/"panel_18_12_chs.png"/"/NC/_N_NC_GD2_ACX/INI[142]"/360,270,202/460,270,60//"UserGuide/section_1.html","S1D17");全长锥度补偿
-
-	DEF VAR23=(I/*0=$85014,1=$85013//$85164,$85164,,/WR2/"panel_18_18_chs.png"/"/NC/_N_NC_GD2_ACX/INI[39]"/360,290,80/405,290,32//"UserGuide/section_1.html","S1D19");螺旋升角自动计算
-	DEF VAR24=(I/0,45//$85055,,,$85042/WR2/"panel_18_19_chs.png"/"/NC/_N_NC_GD2_ACX/INI[18]"/0,290,0/460,290,75//"UserGuide/section_1.html","S1D20");度
-	DEF VAR25=(I/0,59//$85056,,,$85053/WR2/"panel_18_20_chs.png"/"/NC/_N_NC_GD2_ACX/INI[19]"/0,290,0/495,290,70//"UserGuide/section_1.html","S1D21");分
-	DEF VAR26=(I/0,59//$85057,,,$85054/WR2/"panel_18_21_chs.png"/"/NC/_N_NC_GD2_ACX/INI[20]"/0,290,0/525,290,70//"UserGuide/section_1.html","S1D22");秒
-	DEF WORK_MID_DIA=(R/0,200//$85171,$85171,$85043,/WR4/"panel_18_24_chs.png"/"/NC/_N_NC_GD2_ACX/INI[40]"/360,310,202/460,310,60//"UserGuide/section_1.html","S1D23");工件中径
-
-	DEF INITANG=(R///$85176,$85176,$85042,/WR1//"/NC/_N_NC_GD2_ACX/TOOL_SET[5]"/10,310,210/120,310,60//"UserGuide/section_1.html","S1D24");头架初始角
 	DEF VAR19=(R///$85158,$85158,,/WR1//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/10,330,210/120,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
 	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR1/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/10,350,210/120,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
-	DEF SHOUJIAN=(I/*0=$85087,1=$85088//$85089,$85039,,/WR2/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/TOOL_SET[58]"/190,350,20/210,350,70//"UserGuide/section_1.html","S1D27");是否是首件工件
 
 	DEF VAR45=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[16]"/0,0,0/0,0,0);精简工艺参数/扩展工艺参数
 
@@ -145,41 +128,6 @@
 		ENDIF
 	END_CHANGE
 
-	CHANGE(VAR9)
-		IF (Z_INIT.VAL<VAR9.VAL+30) AND (VAR9.VAL+30<=Z_SOFTENDP.VAL)
-			Z_INIT.VAL=VAR9.VAL+30
-		ELSE
-			IF (Z_INIT.VAL<VAR9.VAL+30) AND (VAR9.VAL+30>Z_SOFTENDP.VAL)
-				Z_INIT.VAL=Z_SOFTENDP.VAL
-			ELSE
-				IF (Z_INIT.VAL>=VAR9.VAL+30) AND (Z_INIT.VAL>Z_SOFTENDP.VAL)
-					Z_INIT.VAL=Z_SOFTENDP.VAL
-				ELSE
-					IF (Z_INIT.VAL>=VAR9.VAL+30) AND (Z_INIT.VAL<=Z_SOFTENDP.VAL)
-						Z_INIT.VAL=Z_INIT.VAL
-					ENDIF
-				ENDIF
-			ENDIF
-		ENDIF
-	END_CHANGE
-
-	CHANGE(Z_INIT)
-		IF (Z_INIT.VAL<VAR9.VAL+30) AND (VAR9.VAL+30<=Z_SOFTENDP.VAL)
-			Z_INIT.VAL=VAR9.VAL+30
-		ELSE
-			IF (Z_INIT.VAL<VAR9.VAL+30) AND (VAR9.VAL+30>Z_SOFTENDP.VAL)
-				Z_INIT.VAL=Z_SOFTENDP.VAL
-			ELSE
-				IF (Z_INIT.VAL>=VAR9.VAL+30) AND (Z_INIT.VAL>Z_SOFTENDP.VAL)
-					Z_INIT.VAL=Z_SOFTENDP.VAL
-				ELSE
-					IF (Z_INIT.VAL>=VAR9.VAL+30) AND (Z_INIT.VAL<=Z_SOFTENDP.VAL)
-						Z_INIT.VAL=Z_INIT.VAL
-					ENDIF
-				ENDIF
-			ENDIF
-		ENDIF
-	END_CHANGE
 
 	SUB(UP2)
 		IF QCHECK.VAL==1

@@ -14,12 +14,12 @@ ELSE
         G90 G1 X=WHEEL[10]+INI[132] F=INI[55]
     ENDIF
 ENDIF
-IF DRESSER[37]==0;前/后修整
-    C_RESET_ANGLE;升角复位
+
+C_RESET_ANGLE;升角复位
 ;
-    MSG("台面到位中"); ifIsCHS
-    G90 G1 Z=DRESSER[21] F=INI[56]
-ENDIF
+MSG("台面到位中"); ifIsCHS
+G90 G1 Z=DRESSER[21] F=INI[56]
+
 ;
 MSG("修整轮运行至修整位置"); ifIsCHS
 IF GRIND[0]<>1;不是内螺纹

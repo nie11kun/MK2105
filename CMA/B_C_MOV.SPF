@@ -3,7 +3,7 @@ PROC B_C_MOV DISPLOF
 ;*C轴旋转动作
 ;****************************
 
-IF $A_DBB[6]==1;C轴旋转键选中
+IF $A_DBB[6]==2;C轴旋转键选中
     F_GRINDWHEEL_RUN(INI[81]);砂轮启动
 
 ;

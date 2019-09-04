@@ -16,7 +16,7 @@ TECH_TIME[2]=0;当前半精磨次数
 TECH_TIME[3]=0;当前精磨次数
 TECH_TIME[4]=0;当前DIY次数
 INI[25]=1;退刀计算标志位置1
-WORK[1]=0;当前磨削头数
+
 DRESSER[38]=0;界面工艺修整量总量
 TOOL_SET[40]=0;是否已执行过二次对刀的标记
 INI[72]=0;磨削中进行过修整后的标记
@@ -188,8 +188,7 @@ ELSE;不是内螺纹磨削
 ENDIF
 
 INI[3]=INI[2]-INI[1];磨削长度
-INI[5]=WORK[0]*INI[4];导程
-INI[9]=360*(INI[3]-INI[24])/INI[5];磨削总角度
+
 INI[8]=(INI[2]+INI[1])/2;磨削中点
 
 ;锥度相关计算,内螺纹大头往小头磨,外螺纹小头往大头磨
@@ -205,16 +204,6 @@ IF PROCESS[0]==0;选择界面工艺时执行判断,选择DIY时在DIY内执行�
 ELSE
 	PROCESS[2]=4;当前工艺
 ENDIF
-
-TECHNOLOGY[140]=TECHNOLOGY[60]*INI[4]*WORK[0];磨削速度计算
-TECHNOLOGY[141]=TECHNOLOGY[61]*INI[4]*WORK[0];磨削速度计算
-TECHNOLOGY[142]=TECHNOLOGY[62]*INI[4]*WORK[0];磨削速度计算
-TECHNOLOGY[143]=TECHNOLOGY[63]*INI[4]*WORK[0];磨削速度计算
-
-TECHNOLOGY[200]=TECHNOLOGY[267]*INI[4]*WORK[0];磨削速度计算
-TECHNOLOGY[201]=TECHNOLOGY[268]*INI[4]*WORK[0];磨削速度计算
-TECHNOLOGY[202]=TECHNOLOGY[269]*INI[4]*WORK[0];磨削速度计算
-TECHNOLOGY[203]=TECHNOLOGY[270]*INI[4]*WORK[0];磨削速度计算
 
 ;报警判断
 IF (INI[3]<=0) AND (RING[0]==0);磨削长度<=0 且不是环形槽磨削
