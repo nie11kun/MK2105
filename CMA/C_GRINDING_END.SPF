@@ -8,9 +8,7 @@ STOPRE
 INI[25]=0;退刀计算标志位置0
 
 IF (PROCESS[0]==0) AND (RING[0]==0);如果不是DIY且不是环形槽
-    DO MOV[C]=1 FA[C]=3600
-    G4 F0.5
-    DO MOV[C]=0;停止c轴旋转
+    M05;头架停止
     M9;内磨削冷却关
     M29;修整冷却关
     M57;退刀关
