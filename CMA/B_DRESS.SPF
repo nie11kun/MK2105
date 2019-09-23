@@ -33,7 +33,7 @@ WHILE(DRESSER[18]+DRESSER[19]<=DRESSER[11]+DRESSER[12])
     D_GRINDWHEEL_DIACURNT;当前砂轮直径计算
     M28;修整冷却开
     C_DRESS_SHAPE;修整
-    IF $A_DBB[2]==1;修整中途安全结束程序
+    IF $A_IN[2]==1;修整中途安全结束程序
         DRESSER[19]=DRESSER[19]+1
         GOTOF DRESS_ENDING
     ENDIF

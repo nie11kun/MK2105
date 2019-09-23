@@ -17,7 +17,7 @@ IF (PROCESS[0]==0) AND (RING[0]==0);如果不是DIY且不是环形槽
     F_DRESSWHEEL_STOP;修整轮停止
     IF (INI[70]==1) AND (GRIND[2]<>2);有自动门(0没有/1有)
         M47;罩壳门打开
-        WHILE($A_DBB[9]==0);等待罩壳门打开
+        WHILE($A_IN[9]==0);等待罩壳门打开
             G4 F0.2
         ENDWHILE
     ENDIF

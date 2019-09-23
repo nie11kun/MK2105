@@ -65,7 +65,7 @@ IF INI[47]==0;磨削中不正常退出标记
     PROCESS[14]=PROCESS[14]+PROCESS[8];累计工艺磨削量累计
 ENDIF
 
-IF $A_DBB[2]==1;按下退刀键跳转到结束程序
+IF $A_IN[2]==1;按下退刀键跳转到结束程序
     RET
 ENDIF
 

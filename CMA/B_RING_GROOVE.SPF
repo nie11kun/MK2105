@@ -3,16 +3,16 @@ PROC B_RING_GROOVE DISPLON
 ;*环形槽
 ;****************************
 
-IF $A_DBB[0]<>0;修整
+IF $A_IN[11]<>0;修整
     B_SCREW;磨削主程序
     GOTOF RING_ENDING
 ENDIF
 
-IF $A_DBB[1]<>0;手动对刀
+IF $A_IN[1]<>0;手动对刀
     RET
 ENDIF
 
-IF $A_DBB[5]<>0;自动对刀
+IF $A_IN[5]<>0;自动对刀
     RET
 ENDIF
 
@@ -29,7 +29,7 @@ RING[5]=0;已加工槽数
 WHILE(RING[5]<RING[4]);已加工小于需加工
     C_RING_RELATED_POS(RING[2]+RING[5],RING[6],RING[7]);当前槽的XZ方向偏移量计算
     B_SCREW;磨削主程序
-    IF (DRESSER[6]<>0) OR ($A_DBB[2]==1);有报警/按下退刀键则退出程序
+    IF (DRESSER[6]<>0) OR ($A_IN[2]==1);有报警/按下退刀键则退出程序
         GOTOF RING_ENDING
     ENDIF
     STOPRE
@@ -58,7 +58,7 @@ F_GRINDWHEEL_STOP;砂轮停止
 F_DRESSWHEEL_STOP;修整轮停止
 IF (INI[70]==1) AND (GRIND[2]<>2);有自动门(0没有/1有)
     M47;罩壳门打开
-    WHILE($A_DBB[9]==0);等待罩壳门打开
+    WHILE($A_IN[9]==0);等待罩壳门打开
         G4 F0.2
     ENDWHILE
 ENDIF

@@ -65,23 +65,23 @@ ELSE;蜗杆
 	ENDIF
 ENDIF
 
-GRIND[1]=$A_DBB[0];是否修整
+GRIND[1]=$A_IN[11];是否修整
 
 IF INI[69]==0;无自动对刀
-	GRIND[2]=$A_DBB[1];是否对刀
+	GRIND[2]=$A_IN[1];是否对刀
 ELSE
 	IF TOOL_SET[68]==0;磨削中心：自动对刀标记
-		IF ($A_DBB[1]==0) AND ($A_DBB[5]==0)
+		IF ($A_IN[1]==0) AND ($A_IN[5]==0)
 			GRIND[2]=0;不对刀
 		ELSE
-			IF ($A_DBB[1]==1) AND ($A_DBB[5]==0)
+			IF ($A_IN[1]==1) AND ($A_IN[5]==0)
 				GRIND[2]=1;手动对刀
 			ELSE
-				IF ($A_DBB[1]==0) AND ($A_DBB[5]==1)
+				IF ($A_IN[1]==0) AND ($A_IN[5]==1)
 					GRIND[2]=2;自动对刀(只计算C角度)
 					TOOL_SET[8]=0;首次对刀
 				ELSE
-					IF ($A_DBB[1]==1) AND ($A_DBB[5]==1)
+					IF ($A_IN[1]==1) AND ($A_IN[5]==1)
 						GRIND[2]=2;自动对刀(只计算C角度)
 						TOOL_SET[8]=0;首次对刀
 					ENDIF
@@ -110,7 +110,7 @@ ENDIF
 IF INI[70]==1;有自动门(0没有/1有)
 	IF (GRIND[2]==0) OR (GRIND[2]==2);不对刀或自动对刀(只计算C角度)
 		M48;罩壳门关闭
-		WHILE($A_DBB[10]==0);等待罩壳门关闭
+		WHILE($A_IN[10]==0);等待罩壳门关闭
 			G4 F0.2
 		ENDWHILE
 	ENDIF

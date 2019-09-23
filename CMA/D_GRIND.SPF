@@ -36,7 +36,7 @@ G4 F0.2
 G01 G90 Z=INI[6] F=PROCESS[9];Z轴到磨削起点
 G4 F0.2
 
-IF $A_DBB[2]==1;磨削中途按下退刀,安全结束程序
+IF $A_IN[2]==1;磨削中途按下退刀,安全结束程序
 	RET
 ENDIF
 STOPRE
@@ -46,7 +46,7 @@ IF PROCESS[6]==1;单向/双向
 	E_CYCLE_MESSAGE
 	G01 G90 Z=INI[7] F=PROCESS[9];Z轴到磨削起点
 	G4 F0.2
-	IF $A_DBB[2]==1
+	IF $A_IN[2]==1
 		RET
 	ENDIF
 	;*********************
@@ -59,7 +59,7 @@ ELSE
 	G4 F0.2
 	E_SINGLEGRIND_XZBACK(INI[10]);内螺纹  ifIsInternal
 	;*********************
-	IF $A_DBB[2]==1;返回起点过程中按下退刀键,安全结束程序
+	IF $A_IN[2]==1;返回起点过程中按下退刀键,安全结束程序
 		RET
 	ENDIF
 	STOPRE

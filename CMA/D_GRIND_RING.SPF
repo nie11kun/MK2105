@@ -25,7 +25,7 @@ X=PROCESS[4] F=INI[147];X进给
 
 G4 F3;
 
-IF $A_DBB[2]==1;磨削中途按下退刀,安全结束程序
+IF $A_IN[2]==1;磨削中途按下退刀,安全结束程序
 	RET
 ENDIF
 STOPRE
@@ -34,7 +34,7 @@ STOPRE
 ;
 E_DOUBLEGRIND_XBACK(INI[10]);内螺纹  ifIsInternal
 ;*********************
-IF $A_DBB[2]==1;返回起点过程中按下退刀键,安全结束程序
+IF $A_IN[2]==1;返回起点过程中按下退刀键,安全结束程序
 	RET
 ENDIF
 

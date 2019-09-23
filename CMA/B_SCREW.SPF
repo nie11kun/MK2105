@@ -69,7 +69,7 @@ WHILE(TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]<=TECHNOLO
         C_PARA_TRAN(DRESSER[26],DRESSER[28],DRESSER[30],DRESSER[36]);参数传递
     ENDIF
     C_TECH_PARA_TRANS;单件/批量工艺界面参数传递
-    IF (DRESSER[6]<>0) OR ($A_DBB[2]==1);有报警/按下退刀键则退出程序
+    IF (DRESSER[6]<>0) OR ($A_IN[2]==1);有报警/按下退刀键则退出程序
         GOTOF G_ENDING
     ENDIF
     C_BCYC;工序进给大循环判断

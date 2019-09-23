@@ -46,7 +46,7 @@ STOPRE
 DRFOF
 
 X_BACK:
-IF $A_DBB[2]==1;按下退刀键
+IF $A_IN[2]==1;按下退刀键
 	C_EXITWORK;退出工件范围
 ENDIF
 

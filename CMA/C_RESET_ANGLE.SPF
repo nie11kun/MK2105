@@ -8,7 +8,7 @@ IF INI[16]==1
 		M73;液压开
 		G4 F1
 		M35;松开
-		WHILE($A_DBB[14]==0);未松开
+		WHILE($A_IN[14]==0);未松开
 			G4 F0.2
 		ENDWHILE
 		G4 F1
