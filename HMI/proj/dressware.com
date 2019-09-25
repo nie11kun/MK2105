@@ -21,6 +21,8 @@
 	DEF VAR0=(R/-800,800//$85601,$85601,,$85043/WR2/"panel_19_2_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[3]"/325,40,110/440,40,110//"UserGuide/section_4.html","S4D12");回零时砂轮与修整轮中间距
 	DEF para_switch=(I/*0=$85058,1=$85059//$85063,$85063,,/WR2/"panel_19_2_chs.png"/"/NC/_N_NC_GD2_ACX/PARA_LOCK_SWITCH[10]"/0,0,0/530,40,18/);参数锁定开关
 
+	DEF VAR12=(R/-2000,2000//$85626,$85626,,$85043/WR2/"panel_17_7_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[22]"/325,70,110/440,70,110//"UserGuide/section_4.html","S4D13");砂轮与修整轮Z中心
+
 	DEF VAR7=(R/0,500//$85620,$85620,,$85043/WR2/"panel_19_5_chs.png"/"/NC/_N_NC_GD2_ACX/WHEEL[1]"/325,190,110/440,190,110//"UserGuide/section_4.html","S4D4");修整轮直径
 	DEF VAR8=(R/0,60//$85621,$85621,,$85046/WR2/"panel_19_6_chs.png"/"/NC/_N_NC_GD2_ACX/WHEEL[2]"/325,210,110/440,210,110//"UserGuide/section_4.html","S4D5");修整轮线速度
 	DEF VAR9=(I///$85600,$85600,,$85044/WR1//"/NC/_N_NC_GD2_ACX/WHEEL[20]"/325,230,110/440,230,110/);修整轮转速
