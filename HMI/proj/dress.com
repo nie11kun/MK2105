@@ -11,7 +11,7 @@
 	DEF VAR9=(R/0,0.5//$85309,$85309,,$85043/WR2/"panel_3_6_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[29]"/330,150,110/440,150,110//"UserGuide/section_3.html","S3D11");精修量
 	DEF VAR10=(R/0,1000//$85307,$85307,,$85045/WR2/"panel_3_6_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[31]"/330,170,110/440,170,110//"UserGuide/section_3.html","S3D12");精修速度
 
-	DEF VAR12=(R/0,200//$85316,$85316,,$85043/WR2/"panel_3_9_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[23]"/330,200,110/440,200,110//"UserGuide/section_3.html","S3D13");砂轮宽度
+	DEF VAR12=(R/0,200//$85316,$85316,,$85043/WR4/"panel_3_9_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[23]"/330,200,110/440,200,110//"UserGuide/section_3.html","S3D13");砂轮宽度
 	DEF VAR13=(R/0,1000//$85319,$85319,,$85043/WR2/"panel_3_7_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[24]"/330,220,110/440,220,110//"UserGuide/section_3.html","S3D14");新砂轮直径
 	DEF VAR14=(R/0,1000//$85320,$85320,,$85043/WR1//"/NC/_N_NC_GD2_ACX/DRESSER[25]"/330,240,110/440,240,110/);砂轮当前直径
 	DEF VAR15=(R/0,80//$85317,$85317,,$85046/WR1/"panel_3_8_chs.png"/"/NC/_N_NC_GD2_ACX/WHEEL_LINESPEED_DRESS[2]"/330,260,110/440,260,110//"UserGuide/section_3.html","S3D15");砂轮线速度
@@ -307,13 +307,13 @@
 ;
 ;
 ;
-				VAR12.WR=2
+
 			ELSE
 ;
 ;
 ;
 ;
-				VAR12.WR=1
+
 			ENDIF
 		ELSE
 			IF VAR1.VAL==1
@@ -332,19 +332,19 @@
 ;
 ;
 ;
-					VAR12.WR=2
+
 				ELSE
 ;
 ;
 ;
 ;
-					VAR12.WR=1
+
 				ENDIF
 			ELSE
 				IF VAR1.VAL==2
 					VAR2.WR=4
 					VAR3.WR=4
-					VAR12.WR=4
+
 					ROLLING_1.WR=1
 					HY_1.WR=4
 					VS1.se=2
@@ -359,7 +359,7 @@
 					IF VAR1.VAL==3
 						VAR2.WR=4
 						VAR3.WR=4
-						VAR12.WR=4
+
 						ROLLING_1.WR=4
 						HY_1.WR=1
 						VS1.se=2
@@ -374,7 +374,7 @@
 						IF VAR1.VAL==4
 							VAR2.WR=4
 							VAR3.WR=4
-							VAR12.WR=2
+
 							ROLLING_1.WR=1
 							HY_1.WR=4
 							VS1.se=2
