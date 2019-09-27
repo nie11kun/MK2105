@@ -28,12 +28,12 @@ G01 G90 X=INI[10] F=INI[55];X开至对刀起始位
 
 ;*********************
 F_Z_POSITION(INI[6]);内螺纹  ifIsInternal
-G01 G90 Z=INI[7] F=INI[57];Z轴到磨削起点
+G01 G90 Z=INI[7] F=INI[57]*4;Z轴到磨削起点
 ;*********************
 
 ;ifIsNotCenterBegin
 
-DO MOV[C]=1 FA[C]=INI[80]*360;c轴旋转
+M03 S=INI[80];c轴旋转
 
 ;ifIsNotCenterEnd
 
