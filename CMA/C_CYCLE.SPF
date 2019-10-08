@@ -95,11 +95,11 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==TECHNOLOGY
     ;*********************
     IF RING[0]==0;螺纹/环形槽加工
 ;
-        D_GRIND_INIT_POSITION(INI[28],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
+        D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
     ELSE
         IF RING[5]==RING[4]-1;最后一槽
 ;
-            D_GRIND_INIT_POSITION(INI[28],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
+            D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
         ENDIF
     ENDIF
 

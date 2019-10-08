@@ -17,10 +17,10 @@ ELSE
         ELSE
             F_ZC_START(INI[7],INI[6],INI[5],INI[135]*INI[5],0)
         ENDIF
-        G90 G01 Z=INI[28] F=INI[56];Z轴到工件右端偏右一位置
+        G90 G01 Z=INI[155] F=INI[56];Z轴到工件右端偏右一位置
         G90 G01 X=INI[23] F=INI[54]
     ELSE
-        G90 G01 Z=INI[28] F=INI[56];Z轴到工件右端偏右一位置 ifIsNotCenter
+        G90 G01 Z=INI[155] F=INI[56];Z轴到工件右端偏右一位置 ifIsNotCenter
     ENDIF
 ENDIF
 
