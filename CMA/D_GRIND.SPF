@@ -11,10 +11,10 @@ INI[47]=1;磨削中不正常退出标记
 E_ZHONGJIN_FIX(GRIND[4])
 GRIND[4]=0;清零
 
-IF INI[26]<>0;0是单件磨削模式,1是批量磨削模式
-	S=TECHNOLOGY[60+PROCESS[2]];旋转
+IF INI[26]<>0
+    S=TECHNOLOGY[60+PROCESS[2]];旋转
 ELSE
-	S=TECHNOLOGY[267+PROCESS[2]];旋转
+    S=TECHNOLOGY[267+PROCESS[2]];旋转
 ENDIF
 
 G4 F0.2
@@ -39,7 +39,6 @@ ENDIF
 G4 F=INI[154]
 
 G01 G90 Z=INI[6] F=PROCESS[9];Z轴到磨削起点
-
 G4 F=INI[154]
 
 IF $A_IN[2]==1;磨削中途按下退刀,安全结束程序
@@ -47,13 +46,13 @@ IF $A_IN[2]==1;磨削中途按下退刀,安全结束程序
 ENDIF
 STOPRE
 IF PROCESS[6]==1;单向/双向
+
 	G91 G01 X=-PROCESS[8]/2 F=20
 
-	G4 F=INI[154]
+    G4 F=INI[154]
 
 	E_CYCLE_MESSAGE
 	G01 G90 Z=INI[7] F=PROCESS[9];Z轴到磨削起点
-
 	G4 F=INI[154]
 
 	IF $A_IN[2]==1
