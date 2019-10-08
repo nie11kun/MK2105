@@ -74,6 +74,8 @@
 	DEF WORK_CUMU=(I///$85227,$85227,,$85228/WR2//"/NC/_N_NC_GD2_ACX/INI[74]"/230,1,110/300,1,110//"UserGuide/section_2.html","S2D1");磨削工件计数(磨削完毕后累加)
 	DEF WORK_DRESS=(I///$85229,$85229,,$85228/WR2//"/NC/_N_NC_GD2_ACX/INI[75]"/230,20,110/300,20,110//"UserGuide/section_2.html","S2D2");磨削几件后修整(次数到达后,下一次开始时修整)
 
+	DEF DELAY_TIME=(R/0,10//$85189,$85189,,/WR2//"/NC/_N_NC_GD2_ACX/INI[155]"/30,320,190/130,320,60/);起点终点停留时间
+
 	DEF QCHECK=(I////WR4//"/Plc/Q113.5"/0,0,0/0,0,0);循环启动Q点检测
 	DEF TECH_CHECK=(I///$85220,$85219,$85043,/WR4//"/NC/_N_NC_GD2_ACX/PROCESS[3]"/0,0,0/0,0,0);当前执行那道工艺检测
 	
