@@ -1,3 +1,5 @@
+DRFOF
+
 IF $A_IN[2]<>0;异常退刀
     IF (ABS($AA_IM[X]-INI[10])<10) AND ($AA_IM[Z]<=INI[28]);砂轮在工件附近
         G90 G01 X=INI[10] F=INI[65];到中心
