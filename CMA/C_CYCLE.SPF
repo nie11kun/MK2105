@@ -27,11 +27,23 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI
     
     ;**********************
     ;
-    S=TECHNOLOGY[60+PROCESS[2]];旋转
+    IF INI[157]==0;工件是否在旋转(0未旋转1旋转中)
+        INI[157]=1
+        M3 S=30;头架启动
+        G4 F0.5
+        M3 S=100;头架启动
+        G4 F0.5
+    ENDIF
+
+    IF INI[26]<>0;批量
+        S=TECHNOLOGY[60+PROCESS[2]];旋转
+    ELSE
+        S=TECHNOLOGY[267+PROCESS[2]];旋转
+    ENDIF
+
     G4 F0.2
-    M03;头架旋转
-    G4 F2
-    
+    M3;头架旋转
+
     ;ifIsInternalBegin
     IF RING[0]==0;螺纹/环形槽加工
         D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
