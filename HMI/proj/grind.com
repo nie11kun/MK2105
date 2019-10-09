@@ -28,8 +28,17 @@
 	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
 	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
 
-	DEF VAR19=(R///$85158,$85158,,/WR1//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/10,330,210/120,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
-	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR1/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/10,350,210/120,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+	DEF VAR19=(R///$85158,$85158,,/WR1//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
+	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR1/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+
+	DEF JIAJU_TEXT=(I///$85155,$85155,,/WR1///10,160,202/110,160,60//);
+	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2//"$R[100]"/10,180,202/110,180,60//);头架转速
+	DEF JIAJU_SHALUN=(I/0,//$85149,$85149,,/WR2//"$R[101]"/10,200,202/110,200,60//);砂轮转速
+	DEF JIAJU_YOUDUAN=(R///$85150,$85150,,/WR2//"$R[102]"/10,230,202/110,230,60//);磨削右端z
+	DEF JIAJU_ZUODUAN=(R///$85151,$85151,,/WR2//"$R[103]"/10,250,202/110,250,60//);磨削左端z
+	DEF JIAJU_QIDIAN=(R///$85152,$85152,,/WR2//"$R[104]"/10,280,202/110,280,60//);磨削起点x
+	DEF JIAJU_JINDAO=(R///$85153,$85153,,/WR2//"$R[105]"/10,300,202/110,300,60//);进刀量
+	DEF JIAJU_SUDU=(R///$85154,$85154,,/WR2//"$R[106]"/10,320,202/110,320,60//);磨削速度
 
 	DEF VAR45=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[16]"/0,0,0/0,0,0);精简工艺参数/扩展工艺参数
 
@@ -38,6 +47,7 @@
 	DEF JIXIESHOU=(I////WR4//"/NC/_N_NC_GD2_ACX/INI[86]"/0,0,0/0,0,0);机械手
 	DEF KONG_YUN_XING=(I////WR4//"/NC/_N_NC_GD2_ACX/INI[154]"/0,0,0/0,0,0/);空运行
 	DEF MONI_TEST=(I////WR4//"/NC/_N_NC_GD2_ACX/GRIND[9]"/0,0,0/0,0,0/);模拟测试
+	DEF JIAJU_DRESS=(I////WR4//"/NC/_N_NC_GD2_ACX/INI[159]"/0,0,0/0,0,0/);夹具修整
 
 	HS1=($85001,ac7,se3);磨削参数
 	HS2=($85002,ac7,se1);工艺参数
@@ -51,6 +61,7 @@
 	VS1=($85035,ac7,se1);
 	VS2=($85064,ac7,se1);
 	VS3=($85065,ac7,se1);
+	VS4=($85066,ac7,se1);
 
 	LOAD
 		IF JIXIESHOU.VAL==1
@@ -61,6 +72,9 @@
 		ENDIF
 		IF MONI_TEST.VAL==1
 			VS3.SE=3
+		ENDIF
+		IF JIAJU_DRESS.VAL==1
+			VS4.SE=3
 		ENDIF
 	END_LOAD
 
@@ -91,6 +105,16 @@
 		ELSE
 			MONI_TEST.VAL=0
 			VS3.SE=1
+		ENDIF	
+	END_PRESS
+
+	PRESS(VS4)
+		IF JIAJU_DRESS.VAL==0
+			JIAJU_DRESS.VAL=1
+			VS4.SE=3
+		ELSE
+			JIAJU_DRESS.VAL=0
+			VS4.SE=1
 		ENDIF	
 	END_PRESS
 

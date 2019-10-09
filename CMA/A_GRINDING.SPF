@@ -9,6 +9,8 @@ B_KONG_YUN_XING;空运行
 
 B_C_MOV;C轴旋转动作
 
+B_JIAJU;自磨夹具
+
 IF RING[0]==0;螺纹/环形槽加工
     RING[6]=0;任意槽的X相对偏移量
     RING[7]=0;任意槽的Z相对偏移量

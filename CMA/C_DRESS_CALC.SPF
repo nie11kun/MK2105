@@ -34,6 +34,8 @@ ELSE
         PROCESS[13]=PROCESS[13]-DRESSER[14];初始进刀位置计算
         PROCESS[4]=PROCESS[4]-DRESSER[14];当前进刀位置计算
 
+        R104=R104-DRESSER[14];夹具磨削位置
+
 ;
         MSG("粗修整中-->正在进行第"<<DRESSER[18]<<"次,还剩"<<DRESSER[11]-DRESSER[18]<<"次完成,进给量:"<<DRESSER[14]<<"mm"); ifIsCHS
     ELSE
@@ -45,6 +47,7 @@ ELSE
             PROCESS[13]=PROCESS[13]-DRESSER[15];初始进刀位置计算
             PROCESS[4]=PROCESS[4]-DRESSER[15];当前进刀位置计算
 
+            R104=R104-DRESSER[15];夹具磨削位置
 ;
             MSG("精修整中-->正在进行第"<<DRESSER[19]<<"次,还剩"<<DRESSER[12]-DRESSER[19]<<"次完成,进给量:"<<DRESSER[15]<<"mm"); ifIsCHS
         ELSE
