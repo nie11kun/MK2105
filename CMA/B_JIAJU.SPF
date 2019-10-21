@@ -1,6 +1,6 @@
 PROC B_JIAJU DISPLOF
 
-IF INI[158]==0;是否自磨夹具
+IF (INI[158]==0) OR ($A_IN[11]==1);不自磨夹具或要修整跳出
     RET
 ENDIF
 
