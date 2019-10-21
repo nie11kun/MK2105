@@ -17,16 +17,15 @@ ELSE
     S=TECHNOLOGY[267+PROCESS[2]];旋转
 ENDIF
 
-G4 F0.2
 M03;头架旋转
 
-G01 G90 Z=INI[7] F=INI[57]*4;Z轴到磨削起点
+G64 G01 G90 Z=INI[7] F=INI[57]*4;Z轴到磨削起点
 
 E_CYCLE_MESSAGE
 
 IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI[72]==1);第一次磨削或者修整后的磨削
 	INI[72]=0;标记清零
-	G90 G01 X=PROCESS[4]+PROCESS[8]*4 F=100;快速到达磨削位置附近
+	G64 G90 G01 X=PROCESS[4]+PROCESS[8]*4 F=100;快速到达磨削位置附近
 ENDIF
 
 G90 G01 X=PROCESS[4]+PROCESS[8] F=10;快速到达磨削位置附近
@@ -38,7 +37,7 @@ ENDIF
 
 G4 F=INI[154]
 
-G01 G90 Z=INI[6] F=PROCESS[9];Z轴到磨削起点
+G64 G01 G90 Z=INI[6] F=PROCESS[9];Z轴到磨削起点
 G4 F=INI[154]
 
 IF $A_IN[2]==1;磨削中途按下退刀,安全结束程序
@@ -65,7 +64,7 @@ IF PROCESS[6]==1;单向/双向
 ELSE
 	;*********************
 	G01 G90 Z=INI[7] F=PROCESS[9];Z轴到磨削起点
-	G4 F0.2
+
 	E_SINGLEGRIND_XZBACK(INI[10]);内螺纹  ifIsInternal
 	;*********************
 	IF $A_IN[2]==1;返回起点过程中按下退刀键,安全结束程序
