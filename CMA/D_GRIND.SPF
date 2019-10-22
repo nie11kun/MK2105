@@ -29,41 +29,29 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI
 ENDIF
 
 G90 G01 X=PROCESS[4]+PROCESS[8] F=10;快速到达磨削位置附近
-IF PROCESS[6]==0;单向/双向
-	X=PROCESS[4] F=0.4;X进给
-ELSE
-	X=PROCESS[4]+PROCESS[8]/2 F=0.4;双向磨削X进给
-ENDIF
 
 G4 F=INI[154]
 
-G64 G01 G90 Z=INI[6] F=PROCESS[9];Z轴到磨削起点
-G4 F=INI[154]
+FGROUP(Z)
 
-IF $A_IN[2]==1;磨削中途按下退刀,安全结束程序
-	RET
-ENDIF
-STOPRE
 IF PROCESS[6]==1;单向/双向
-
-	G91 G01 X=-PROCESS[8]/2 F=20
-
+    G64 G01 G90 Z=INI[6] X=PROCESS[4]+PROCESS[8]/2 F=PROCESS[9];Z轴到磨削起点
     G4 F=INI[154]
 
-	E_CYCLE_MESSAGE
-	G01 G90 Z=INI[7] F=PROCESS[9];Z轴到磨削起点
+	G01 G90 Z=INI[7] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
 	G4 F=INI[154]
-
-	IF $A_IN[2]==1
-		RET
-	ENDIF
 	;*********************
 ;
 	E_DOUBLEGRIND_XBACK(INI[10]);内螺纹  ifIsInternal
 	;*********************
+    STOPRE
 ELSE
 	;*********************
-	G01 G90 Z=INI[7] F=PROCESS[9];Z轴到磨削起点
+    G64 G01 G90 Z=INI[6] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
+    G4 F=INI[154]
+
+	G01 G90 Z=INI[7] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
+	G4 F=INI[154]
 
 	E_SINGLEGRIND_XZBACK(INI[10]);内螺纹  ifIsInternal
 	;*********************
@@ -71,7 +59,6 @@ ELSE
 		RET
 	ENDIF
 	STOPRE
-	INI[47]=1;磨削中不正常退出标记
 ENDIF
 
 STOPRE
