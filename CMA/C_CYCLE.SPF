@@ -49,12 +49,15 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI
     ;ifIsInternalBegin
     IF RING[0]==0;螺纹/环形槽加工
         D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
+        M8;磨削冷却开
         G01 G90 Z=INI[6] F=INI[56]
     ELSE
         IF $AA_IM[X]<>INI[10];当前x轴没在中心，砂轮在外面
             D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
+            M8;磨削冷却开
             G01 G90 Z=INI[6] F=INI[56]
         ENDIF
+        M8;磨削冷却开
         G01 G90 Z=INI[6] F=INI[57]
     ENDIF
     ;ifIsInternalEnd
