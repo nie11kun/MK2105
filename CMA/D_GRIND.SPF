@@ -3,6 +3,27 @@ PROC D_GRIND DISPLOF
 ;*螺纹小循环:
 ;*完整磨削一个工件循环
 ;****************************
+DEF INT CYCLE_TIME,CYCLE_TIME_CURR,CYCLE_TIME_1,DELAY_TIME,X_FEED
+
+IF PROCESS[8]==0;最后一刀，进给量0
+	PROCESS[4]=PROCESS[4]+0.001
+ENDIF
+
+IF PROCESS[2]==0;粗磨
+	DELAY_TIME=5
+	X_FEED=0.4
+ELSE
+	IF PROCESS[2]==1
+		DELAY_TIME=8
+		X_FEED=0.2
+	ELSE
+		DELAY_TIME=4
+		X_FEED=0.2
+	ENDIF
+ENDIF
+
+CYCLE_TIME_1=(INI[6]-INI[7])/PROCESS[9]*2
+CYCLE_TIME=ROUNDUP(PROCESS[8]/X_FEED/CYCLE_TIME_1)+ROUNDUP(DELAY_TIME/CYCLE_TIME_1)
 
 INI[47]=1;磨削中不正常退出标记
 
@@ -28,36 +49,14 @@ ENDIF
 
 G90 G01 X=PROCESS[4]+PROCESS[8] F=10;快速到达磨削位置附近
 
-G4 F=INI[154]
+POSA[X]=PROCESS[4] FA[X]=X_FEED
 
-FGROUP(Z)
+FOR CYCLE_TIME_CURR=0 TO CYCLE_TIME
+	G64 G01 G90 Z=INI[7] F=PROCESS[9];Z轴到磨削起点
+	G01 G90 Z=INI[6] F=PROCESS[9];Z轴到磨削起点
+ENDFOR
 
-IF PROCESS[6]==1;单向/双向
-    G64 G01 G90 Z=INI[7] X=PROCESS[4]+PROCESS[8]/2 F=PROCESS[9];Z轴到磨削起点
-    G4 F=INI[154]
-
-	G01 G90 Z=INI[6] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
-	G4 F=INI[154]
-	;*********************
-;
-	E_DOUBLEGRIND_XBACK(INI[10]);内螺纹  ifIsInternal
-	;*********************
-    STOPRE
-ELSE
-	;*********************
-    G64 G01 G90 Z=INI[7] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
-    G4 F=INI[154]
-
-	G01 G90 Z=INI[6] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
-	G4 F=INI[154]
-
-	E_SINGLEGRIND_XZBACK(INI[10]);内螺纹  ifIsInternal
-	;*********************
-	IF $A_IN[2]==1;返回起点过程中按下退刀键,安全结束程序
-		RET
-	ENDIF
-	STOPRE
-ENDIF
+WAITP(X)
 
 STOPRE
 INI[47]=0;磨削中不正常退出标记
