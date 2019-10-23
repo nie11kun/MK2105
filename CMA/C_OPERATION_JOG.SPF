@@ -28,7 +28,6 @@ G01 G90 X=INI[10] F=INI[55];X开至对刀起始位
 
 ;*********************
 F_Z_POSITION(INI[6]);内螺纹  ifIsInternal
-G01 G90 Z=INI[7] F=INI[57]*4;Z轴到磨削起点
 ;*********************
 
 ;ifIsNotCenterBegin

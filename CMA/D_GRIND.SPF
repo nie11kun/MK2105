@@ -4,8 +4,6 @@ PROC D_GRIND DISPLOF
 ;*完整磨削一个工件循环
 ;****************************
 
-DEF REAL TEMPANG
-
 INI[47]=1;磨削中不正常退出标记
 
 E_ZHONGJIN_FIX(GRIND[4])
@@ -19,7 +17,7 @@ ENDIF
 
 M03;头架旋转
 
-G64 G01 G90 Z=INI[7] F=INI[57]*4;Z轴到磨削起点
+G64 G01 G90 Z=INI[6] F=INI[57]*4;Z轴到磨削起点
 
 E_CYCLE_MESSAGE
 
@@ -35,10 +33,10 @@ G4 F=INI[154]
 FGROUP(Z)
 
 IF PROCESS[6]==1;单向/双向
-    G64 G01 G90 Z=INI[6] X=PROCESS[4]+PROCESS[8]/2 F=PROCESS[9];Z轴到磨削起点
+    G64 G01 G90 Z=INI[7] X=PROCESS[4]+PROCESS[8]/2 F=PROCESS[9];Z轴到磨削起点
     G4 F=INI[154]
 
-	G01 G90 Z=INI[7] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
+	G01 G90 Z=INI[6] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
 	G4 F=INI[154]
 	;*********************
 ;
@@ -47,10 +45,10 @@ IF PROCESS[6]==1;单向/双向
     STOPRE
 ELSE
 	;*********************
-    G64 G01 G90 Z=INI[6] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
+    G64 G01 G90 Z=INI[7] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
     G4 F=INI[154]
 
-	G01 G90 Z=INI[7] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
+	G01 G90 Z=INI[6] X=PROCESS[4] F=PROCESS[9];Z轴到磨削起点
 	G4 F=INI[154]
 
 	E_SINGLEGRIND_XZBACK(INI[10]);内螺纹  ifIsInternal
