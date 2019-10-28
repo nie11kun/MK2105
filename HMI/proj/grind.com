@@ -28,8 +28,8 @@
 	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
 	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
 
-	DEF VAR19=(R///$85158,$85158,,/WR1//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
-	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR1/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+	DEF VAR19=(R///$85158,$85158,,/WR2//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
+	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR2/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
 
 	DEF JIAJU_TEXT=(I///$85155,$85155,,/WR1///10,160,202/110,160,60//);
 	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2//"$R[100]"/10,180,202/110,180,60//);头架转速
