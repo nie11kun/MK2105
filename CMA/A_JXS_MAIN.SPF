@@ -10,13 +10,18 @@ M83;机械手不过来
 TOU: 
 G90 G01 Z=INI[155] F=INI[56]
 G90 G01 X=INI[23] F=INI[54]
-G90 G01 C=INI[156] F=INI[58]
 
 ;机床-机械手信号复位
 M81;门已打开指令复位
 M85;故障信号复位
 M87;卡盘松开信号复位
 M89;卡盘夹紧信号复位
+
+M95;关门
+;WHILE(($A_IN[24]==0)OR($A_IN[23]==1))
+;    MSG("等待自动门关闭")
+;    G4 F0.2
+;ENDWHILE
 
 IF ($A_IN[11]==1) OR ($A_IN[1]==1) OR (INI[85]<>1);修整/对刀/无机械手
     GOTOF TX;单件加工
@@ -26,12 +31,13 @@ B_JXS_ZJ;送料
 
 TX:
 M48;关门
+
+G90 G01 X=INI[10] F=INI[54]
+
 WHILE(($A_IN[10]==0)OR($A_IN[9]==1))
     MSG("等待自动门关闭")
     G4 F0.2
 ENDWHILE
-
-G90 G01 X=INI[10] F=INI[54]
 
 IF GRIND[8]==0;机械手是否进行测试程序(0否1是)
     A_GRINDING;磨削
@@ -41,7 +47,6 @@ ENDIF
 
 G90 G01 Z=INI[155] F=INI[56]
 G90 G01 X=INI[23] F=INI[54]
-G90 G01 C=INI[156] F=INI[58]
 
 STOPRE
 IF ($A_IN[11]==1) OR ($A_IN[1]==1) OR (INI[85]<>1);修整/对刀/不用机械手
