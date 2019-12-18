@@ -18,10 +18,6 @@ M87;卡盘松开信号复位
 M89;卡盘夹紧信号复位
 
 M95;关门
-;WHILE(($A_IN[24]==0)OR($A_IN[23]==1))
-;    MSG("等待自动门关闭")
-;    G4 F0.2
-;ENDWHILE
 
 IF ($A_IN[11]==1) OR ($A_IN[1]==1) OR (INI[85]<>1);修整/对刀/无机械手
     GOTOF TX;单件加工
@@ -35,6 +31,11 @@ M48;关门
 G90 G01 X=INI[10] F=INI[54]
 
 WHILE(($A_IN[10]==0)OR($A_IN[9]==1))
+    MSG("等待自动门关闭")
+    G4 F0.2
+ENDWHILE
+
+WHILE(($A_IN[24]==0)OR($A_IN[23]==1))
     MSG("等待自动门关闭")
     G4 F0.2
 ENDWHILE
