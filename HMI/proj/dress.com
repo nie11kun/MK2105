@@ -12,17 +12,17 @@
 	DEF VAR10=(R/0,5000//$85307,$85307,,$85045/WR2/"panel_3_6_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[31]"/330,170,110/440,170,110//"UserGuide/section_3.html","S3D12");精修速度
 
 	DEF VAR12=(R/0,200//$85316,$85316,,$85043/WR4/"panel_3_9_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[23]"/330,200,110/440,200,110//"UserGuide/section_3.html","S3D13");砂轮宽度
-	DEF VAR13=(R/0,1000//$85319,$85319,,$85043/WR2/"panel_3_7_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[24]"/330,220,110/440,220,110//"UserGuide/section_3.html","S3D14");新砂轮直径
+	DEF VAR13=(R/0,1000//$85319,$85319,,$85043/WR2,ac4/"panel_3_7_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[24]"/330,220,110/440,220,110//"UserGuide/section_3.html","S3D14");新砂轮直径
 	DEF VAR14=(R/0,1000//$85320,$85320,,$85043/WR1//"/NC/_N_NC_GD2_ACX/DRESSER[25]"/330,240,110/440,240,110/);砂轮当前直径
-	DEF VAR15=(R/0,80//$85317,$85317,,$85046/WR1/"panel_3_8_chs.png"/"/NC/_N_NC_GD2_ACX/WHEEL_LINESPEED_DRESS[2]"/330,260,110/440,260,110//"UserGuide/section_3.html","S3D15");砂轮线速度
-	DEF VAR16=(I/0,//$85221,$85221,,$85044/WR1/"panel_3_15_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[37]"/330,280,110/440,280,110//"UserGuide/section_3.html","S3D19");修整时砂轮转速
+	DEF VAR15=(R/0,80//$85317,$85317,,$85046/WR1,ac4/"panel_3_8_chs.png"/"/NC/_N_NC_GD2_ACX/WHEEL_LINESPEED_DRESS[2]"/330,260,110/440,260,110//"UserGuide/section_3.html","S3D15");砂轮线速度
+	DEF VAR16=(I/0,//$85221,$85221,,$85044/WR1,ac4/"panel_3_15_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[37]"/330,280,110/440,280,110//"UserGuide/section_3.html","S3D19");修整时砂轮转速
 
 	DEF VAR4=(I/*0=$85327,1=$85328//$85350,,,/WR2/"panel_3_4_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[6]"/0,0,0/440,30,60//"UserGuide/section_3.html","S3D16");砂轮状态
 
 	;+++++++++++++++++++++++++++++++++++++++++++++
 ;
-	DEF WHEEL_N_MIN=(R/0,1000//$85303,$85303,,$85043/WR4/"panel_3_12_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[36]"/310,310,130/440,310,110//"UserGuide/section_3.html","S3D5");内螺纹砂轮最小直径 ifIsInternal
-	DEF WHEEL_N_MAX=(R/0,1000//$85304,$85304,,$85043/WR4/"panel_3_13_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[50]"/310,330,130/440,330,110//"UserGuide/section_3.html","S3D6");内螺纹砂轮最大磨削直径 ifIsInternal
+	DEF WHEEL_N_MIN=(R/0,1000//$85303,$85303,,$85043/WR4,ac4/"panel_3_12_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[36]"/310,310,130/440,310,110//"UserGuide/section_3.html","S3D5");内螺纹砂轮最小直径 ifIsInternal
+	DEF WHEEL_N_MAX=(R/0,1000//$85304,$85304,,$85043/WR4,ac4/"panel_3_13_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[50]"/310,330,130/440,330,110//"UserGuide/section_3.html","S3D6");内螺纹砂轮最大磨削直径 ifIsInternal
 
 ;
 ;

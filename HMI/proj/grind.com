@@ -18,27 +18,27 @@
 
 	DEF Z_SOFTENDP=(R////WR4//"$AA_SOFTENDP[Z]"/0,0,0/0,0,0/);SOFRENDP_Z
 
-	DEF PIECE_VOLUME=(I/*0=$85166,1=$85167//$85170,$85170,,/WR2/"panel_18_17_chs.png"/"/NC/_N_NC_GD2_ACX/INI[27]"/360,10,70/460,10,80//"UserGuide/section_1.html","S1D1");单件/批量磨削方式选择
-	DEF VAR8=(R3/-2000,2000//$85108,$85108,,/WR2/"panel_18_7_chs.png"/"/NC/_N_NC_GD2_ACX/INI[2]"/360,40,202/460,40,60/6/"UserGuide/section_1.html","S1D10");工件左端
-	DEF VAR9=(R3/-2000,2000//$85109,$85109,,/WR2/"panel_18_8_chs.png"/"/NC/_N_NC_GD2_ACX/INI[3]"/360,60,202/460,60,60/6/"UserGuide/section_1.html","S1D11");工件右端
-	DEF VAR10=(R/-500,500//$85165,$85165,,/WR2/"panel_18_9_chs.png"/"/NC/_N_NC_GD2_ACX/INI[11]"/360,90,202/460,90,60/6/"UserGuide/section_1.html","S1D28");工件中心
-	DEF Z_INIT=(R/-2000,2000//$85101,$85101,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[29]"/360,110,202/460,110,60/6/"UserGuide/section_1.html","S1D30");内螺纹时台面起始位置
+	DEF PIECE_VOLUME=(I/*0=$85166,1=$85167//$85170,$85170,,/WR1,ac4/"panel_18_17_chs.png"/"/NC/_N_NC_GD2_ACX/INI[27]"/360,10,70/460,10,80//"UserGuide/section_1.html","S1D1");单件/批量磨削方式选择
+	DEF VAR8=(R3/-2000,2000//$85108,$85108,,/WR2,ac4/"panel_18_7_chs.png"/"/NC/_N_NC_GD2_ACX/INI[2]"/360,40,202/460,40,60/6/"UserGuide/section_1.html","S1D10");工件左端
+	DEF VAR9=(R3/-2000,2000//$85109,$85109,,/WR2,ac4/"panel_18_8_chs.png"/"/NC/_N_NC_GD2_ACX/INI[3]"/360,60,202/460,60,60/6/"UserGuide/section_1.html","S1D11");工件右端
+	DEF VAR10=(R/-500,500//$85165,$85165,,/WR2,ac4/"panel_18_9_chs.png"/"/NC/_N_NC_GD2_ACX/INI[11]"/360,90,202/460,90,60/6/"UserGuide/section_1.html","S1D28");工件中心
+	DEF Z_INIT=(R/-2000,2000//$85101,$85101,,/WR2,ac4/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[29]"/360,110,202/460,110,60/6/"UserGuide/section_1.html","S1D30");内螺纹时台面起始位置
 
-	DEF JSX_X=(R/-800,800//$85126,$85126,,/WR2/"panel_18_25_chs.png"/"/NC/_N_NC_GD2_ACX/INI[24]"/360,140,202/460,140,60/7/"UserGuide/section_1.html","S1D14");机械手停留x
-	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
-	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
+	DEF JSX_X=(R/-800,800//$85126,$85126,,/WR2,ac4/"panel_18_25_chs.png"/"/NC/_N_NC_GD2_ACX/INI[24]"/360,140,202/460,140,60/7/"UserGuide/section_1.html","S1D14");机械手停留x
+	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2,ac4/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
+	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2,ac4/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
 
-	DEF VAR19=(R///$85158,$85158,,/WR2//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
-	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR2/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+	DEF VAR19=(R///$85158,$85158,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
+	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR2,ac4/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
 
 	DEF JIAJU_TEXT=(I///$85155,$85155,,/WR1///10,160,202/110,160,60//);
-	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2//"$R[100]"/10,180,202/110,180,60//);头架转速
-	DEF JIAJU_SHALUN=(I/0,//$85149,$85149,,/WR2//"$R[101]"/10,200,202/110,200,60//);砂轮转速
-	DEF JIAJU_YOUDUAN=(R///$85150,$85150,,/WR2//"$R[102]"/10,230,202/110,230,60//);磨削右端z
-	DEF JIAJU_ZUODUAN=(R///$85151,$85151,,/WR2//"$R[103]"/10,250,202/110,250,60//);磨削左端z
-	DEF JIAJU_QIDIAN=(R///$85152,$85152,,/WR2//"$R[104]"/10,280,202/110,280,60//);磨削起点x
-	DEF JIAJU_JINDAO=(R///$85153,$85153,,/WR2//"$R[105]"/10,300,202/110,300,60//);进刀量
-	DEF JIAJU_SUDU=(R///$85154,$85154,,/WR2//"$R[106]"/10,320,202/110,320,60//);磨削速度
+	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2,ac4//"$R[100]"/10,180,202/110,180,60//);头架转速
+	DEF JIAJU_SHALUN=(I/0,//$85149,$85149,,/WR2,ac4//"$R[101]"/10,200,202/110,200,60//);砂轮转速
+	DEF JIAJU_YOUDUAN=(R///$85150,$85150,,/WR2,ac4//"$R[102]"/10,230,202/110,230,60//);磨削右端z
+	DEF JIAJU_ZUODUAN=(R///$85151,$85151,,/WR2,ac4//"$R[103]"/10,250,202/110,250,60//);磨削左端z
+	DEF JIAJU_QIDIAN=(R///$85152,$85152,,/WR2,ac4//"$R[104]"/10,280,202/110,280,60//);磨削起点x
+	DEF JIAJU_JINDAO=(R///$85153,$85153,,/WR2,ac4//"$R[105]"/10,300,202/110,300,60//);进刀量
+	DEF JIAJU_SUDU=(R///$85154,$85154,,/WR2,ac4//"$R[106]"/10,320,202/110,320,60//);磨削速度
 
 	DEF VAR45=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[16]"/0,0,0/0,0,0);精简工艺参数/扩展工艺参数
 
@@ -241,7 +241,7 @@
 			VAR10.WR=2
 			X_QUIT.WR=2
 			PITCH_COM.WR=2
-			PIECE_VOLUME.WR=2
+			PIECE_VOLUME.WR=1
 			C_INIT.WR=2
 			Z_INIT.WR=2
 			SHOUJIAN.WR=2
