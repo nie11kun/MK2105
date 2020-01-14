@@ -292,14 +292,14 @@
   <Comment>
     <Row1 type="QString" value="是否手动对刀"/>
     <Row2 type="QString" value="是否退刀"/>
-    <Row3 type="QString" value="液压动作回退到位"/>
-    <Row4 type="QString" value="液压动作伸出到位"/>
+    <Row3 type="QString" value="防碰撞信号1"/>
+    <Row4 type="QString" value="防碰撞信号2"/>
     <Row5 type="QString" value="是否自动对刀"/>
     <Row6 type="QString" value="C轴旋转"/>
-    <Row7 type="QString" value="测量机构1汽缸回退到位"/>
-    <Row8 type="QString" value="测量机构1汽缸伸出到位"/>
-    <Row9 type="QString" value="自动门打开开关"/>
-    <Row10 type="QString" value="自动门关闭开关"/>
+    <Row7 type="QString" value="防碰撞信号3"/>
+    <Row8 type="QString" value="防碰撞信号4"/>
+    <Row9 type="QString" value="自动门1打开开关"/>
+    <Row10 type="QString" value="自动门1关闭开关"/>
     <Row11 type="QString" value="是否修整"/>
     <Row12 type="QString" value="砂轮当前状态"/>
     <Row13 type="QString" value="修整轮当前状态"/>
@@ -312,8 +312,8 @@
     <Row20 type="QString" value="测量机构2汽缸回退到位"/>
     <Row21 type="QString" value="测量机构2汽缸伸出到位"/>
     <Row22 type="QString" value=""/>
-    <Row23 type="QString" value="液压修整器回退到位"/>
-    <Row24 type="QString" value="液压修整器伸出到位"/>
+    <Row23 type="QString" value="自动门2打开开关"/>
+    <Row24 type="QString" value="自动门2关闭开关"/>
     <Row25 type="QString" value=""/>
     <Row26 type="QString" value=""/>
     <Row27 type="QString" value=""/>
