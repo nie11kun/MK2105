@@ -17,6 +17,7 @@
 //M(Mask19/$85379//)
 
 	DEF X_IM=(R///$85118,$85118,,/WR1//"$AA_IM[X]"/10,10,20/30,10,60/3);X_IM
+	DEF Z_IM=(R///$85119,$85119,,/WR1//"$AA_IM[Z]"/10,30,20/30,30,60/3);Z_IM
 
 	DEF VAR0=(R/-800,800//$85601,$85601,,$85043/WR2,ac4/"panel_19_2_chs.png"/"/NC/_N_NC_GD2_ACX/DRESSER[3]"/325,10,110/440,10,110//"UserGuide/section_4.html","S4D12");回零时砂轮与修整轮中间距
 	DEF para_switch=(I/*0=$85058,1=$85059//$85063,$85063,,/WR2,ac4/"panel_19_2_chs.png"/"/NC/_N_NC_GD2_ACX/PARA_LOCK_SWITCH[10]"/0,0,0/530,10,18/);参数锁定开关
