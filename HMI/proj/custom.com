@@ -3,8 +3,8 @@
 
 	DEF TYPE=(I////WR4//"/NC/_N_NC_GD2_ACX/GRIND[1]"/0,0,0/0,0,0/);磨削类型
 
-	HS7=($85000,ac7,se1)
-	VS1=($85006,ac7,se1) 
+	HS7=(["\\S_001.png",$85067],ac7,se1,pa0)
+	VS1=(["\\S_002.png",$85072],ac7,se1,pa0) 
 	
 	PRESS(HS7)
 ;
