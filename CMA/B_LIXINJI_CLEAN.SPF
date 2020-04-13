@@ -1,0 +1,21 @@
+PROC B_LIXINJI_CLEAN DISPLOF
+;***********程序功能**********
+;*离心机清理
+;****************************
+
+IF INI[13]==1;重置日期
+    INI[116]=$A_YEAR;
+    INI[117]=$A_MONTH;
+    INI[118]=$A_DAY;
+    INI[13]=0;
+ENDIF
+
+INI[168]=(($A_YEAR-1)*365+($A_MONTH-1)*31+$A_DAY)-((INI[116]-1)*365+(INI[117]-1)*31+INI[118])
+
+IF INI[167]==1;报警
+    MSG("请清理离心机...")
+    M0
+ENDIF
+
+RET
+
