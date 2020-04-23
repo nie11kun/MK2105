@@ -16,14 +16,6 @@ ELSE
 ENDIF
 
 ;
-MSG("台面离开中"); ifIsCHS
-IF GRIND[0]<>1;不是内螺纹
-    G90 G1 Z=INI[6] F=INI[56]
-ELSE
-    G90 G1 Z=INI[28] F=INI[56]
-ENDIF
-C_ROTATE_ANGLE;螺旋升角
-
 
 RET
 

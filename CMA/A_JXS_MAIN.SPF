@@ -10,8 +10,13 @@ M83;机械手不过来
 TOU: 
 B_LIXINJI_CLEAN;离心机清理
 
-G90 G01 Z=INI[155] F=INI[56]
-G90 G01 X=INI[23] F=INI[54]
+IF $AA_IM[Z]<INI[28];当前z轴位置在里面
+    G64 G90 G01 Z=INI[28] F=INI[56];Z轴到磨削起点
+ENDIF
+IF ($AA_IM[Z]<-200) AND ($AA_IM[X]<WHEEL[10]+100);X轴在修整轮附近
+    G64 G90 G01 Z=-200 F=INI[56];Z轴到磨削起点
+ENDIF
+D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56]);
 
 ;机床-机械手信号复位
 M81;门已打开指令复位
@@ -30,13 +35,6 @@ B_JXS_ZJ;送料
 TX:
 M48;关门
 
-G90 G01 X=INI[10] F=INI[54]
-
-WHILE(($A_IN[10]==0)OR($A_IN[9]==1))
-    MSG("等待自动门关闭")
-    G4 F0.2
-ENDWHILE
-
 WHILE(($A_IN[24]==0)OR($A_IN[23]==1))
     MSG("等待自动门关闭")
     G4 F0.2
@@ -48,8 +46,13 @@ ELSE
     B_JXS_TEST;
 ENDIF
 
-G90 G01 Z=INI[155] F=INI[56]
-G90 G01 X=INI[23] F=INI[54]
+IF $AA_IM[Z]<INI[28];当前z轴位置在里面
+    G64 G90 G01 Z=INI[28] F=INI[56];Z轴到磨削起点
+ENDIF
+IF ($AA_IM[Z]<-200) AND ($AA_IM[X]<WHEEL[10]+100);X轴在修整轮附近
+    G64 G90 G01 Z=-200 F=INI[56];Z轴到磨削起点
+ENDIF
+D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56]);
 
 STOPRE
 IF ($A_IN[11]==1) OR ($A_IN[1]==1) OR (INI[85]<>1);修整/对刀/不用机械手

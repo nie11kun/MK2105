@@ -6,6 +6,11 @@ PROC B_DRESS DISPLON
 C_DRESS_CHOICE;修整参数赋值
 C_DRESS_START;报警及参数初始化
 
+WHILE(($A_IN[10]==0)OR($A_IN[9]==1))
+    MSG("等待自动门关闭")
+    G4 F0.2
+ENDWHILE
+
 IF (DRESSER[6]<>0) OR (DRESSER[11]+DRESSER[12]==0);有报警标记/修整次数为零
     DRESSER[19]=DRESSER[19]+1;精修当前次数加一,匹配完整修整完成时的结果
     GOTOF D_ENDING

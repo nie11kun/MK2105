@@ -12,7 +12,7 @@ IF INI[75]==1;磨削几件后修整标记位
     INI[75]=0;标记位
 
     ;********************
-    F_Z_POSITION(INI[28]);修整初始位置 内螺纹  ifIsInternal
+
     ;*********************
 
     M9;磨削冷却关
@@ -48,12 +48,12 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI
 
     ;ifIsInternalBegin
     IF RING[0]==0;螺纹/环形槽加工
-        D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
+        D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56]);内螺纹
         M8;磨削冷却开
         G01 G90 Z=INI[6] F=INI[56]
     ELSE
         IF $AA_IM[X]<>INI[10];当前x轴没在中心，砂轮在外面
-            D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56],INI[55]);内螺纹
+            D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56]);内螺纹
             M8;磨削冷却开
             G01 G90 Z=INI[6] F=INI[56]
         ENDIF
@@ -63,6 +63,11 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI
     ;ifIsInternalEnd
     ;*********************
 
+    WHILE(($A_IN[10]==0)OR($A_IN[9]==1))
+        MSG("等待自动门关闭")
+        G4 F0.2
+    ENDWHILE
+    
 ENDIF
 
 M8;磨削冷却开
@@ -112,11 +117,17 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==TECHNOLOGY
     ;*********************
     IF RING[0]==0;螺纹/环形槽加工
 ;
-        D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
+        IF $AA_IM[Z]<INI[28];当前z轴位置在里面
+            G64 G90 G01 Z=INI[28] F=INI[56];Z轴到磨削起点
+        ENDIF
+        IF ($AA_IM[Z]<-200) AND ($AA_IM[X]<WHEEL[10]+100);X轴在修整轮附近
+            G64 G90 G01 Z=-200 F=INI[56];Z轴到磨削起点
+        ENDIF
+        D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56]);内螺纹 ifIsInternal
     ELSE
         IF RING[5]==RING[4]-1;最后一槽
 ;
-            D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56],INI[55]);内螺纹 ifIsInternal
+            D_GRIND_INIT_POSITION(INI[155],INI[23],INI[56]);内螺纹 ifIsInternal
         ENDIF
     ENDIF
 
