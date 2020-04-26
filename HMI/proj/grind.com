@@ -2,9 +2,9 @@
 
 ;ifIsInternalBegin
 ;**********************MASK18:磨削参数_内:panel_18:;**********************
-//M(Mask18/$85020//)
+//M(Mask18/$85020/"panel_18_0_chs.png"/)
 
-	DEF DIAMETER_ADJ=(R///$85174,$85174,$85043,/WR2/"panel_18_29_chs.png"/"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,210,202/460,210,60//"UserGuide/section_1.html","S1D2");单次中径调整值
+	DEF DIAMETER_ADJ=(R///$85174,$85174,$85043,/WR2//"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,210,202/460,210,60//"UserGuide/section_1.html","S1D2");单次中径调整值
 
 	DEF VAR1=(I/*0=$85135,1=$85136,2=$85137,3=$85138,4=$85139/1/$85134,,,/WR4//"/NC/_N_NC_GD2_ACX/GRIND[1]"/0,0,0/10,10,60/);磨削类型,生成文件用	
 
@@ -13,23 +13,23 @@
 	DEF X_DRF=(R///$85116,$85116,,/WR1//"$AC_DRF[X]"/120,10,50/170,10,60/7);DRF_X
 	DEF Z_DRF=(R///$85117,$85117,,/WR1//"$AC_DRF[Z]"/120,30,50/170,30,60/7);DRF_Z
 
-	DEF GRINDING_TYPE=(I/*0=$85900,1=$85901//$85902,$85902,,/WR4/"panel_18_31_chs.png"/"/NC/_N_NC_GD2_ACX/RING[1]"/10,60,110/110,60,60//"UserGuide/section_1.html","S1D31");螺纹/环形槽加工
+	DEF GRINDING_TYPE=(I/*0=$85900,1=$85901//$85902,$85902,,/WR4//"/NC/_N_NC_GD2_ACX/RING[1]"/10,60,110/110,60,60//"UserGuide/section_1.html","S1D31");螺纹/环形槽加工
 	DEF RING_DISPLAY=(I////WR4//"/NC/_N_NC_GD2_ACX/RING[50]"/0,0,0/0,0,0/);显示环形槽选择参数
 
 	DEF Z_SOFTENDP=(R////WR4//"$AA_SOFTENDP[Z]"/0,0,0/0,0,0/);SOFRENDP_Z
 
-	DEF PIECE_VOLUME=(I/*0=$85166,1=$85167//$85170,$85170,,/WR1,ac4/"panel_18_17_chs.png"/"/NC/_N_NC_GD2_ACX/INI[27]"/360,10,70/460,10,80//"UserGuide/section_1.html","S1D1");单件/批量磨削方式选择
-	DEF VAR8=(R3/-2000,2000//$85108,$85108,,/WR2,ac4/"panel_18_7_chs.png"/"/NC/_N_NC_GD2_ACX/INI[2]"/360,40,202/460,40,60/6/"UserGuide/section_1.html","S1D10");工件左端
-	DEF VAR9=(R3/-2000,2000//$85109,$85109,,/WR2,ac4/"panel_18_8_chs.png"/"/NC/_N_NC_GD2_ACX/INI[3]"/360,60,202/460,60,60/6/"UserGuide/section_1.html","S1D11");工件右端
-	DEF VAR10=(R/-500,500//$85165,$85165,,/WR2,ac4/"panel_18_9_chs.png"/"/NC/_N_NC_GD2_ACX/INI[11]"/360,90,202/460,90,60/6/"UserGuide/section_1.html","S1D28");工件中心
-	DEF Z_INIT=(R/-2000,2000//$85101,$85101,,/WR2,ac4/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[29]"/360,110,202/460,110,60/6/"UserGuide/section_1.html","S1D30");内螺纹时台面起始位置
+	DEF PIECE_VOLUME=(I/*0=$85166,1=$85167//$85170,$85170,,/WR1,ac4//"/NC/_N_NC_GD2_ACX/INI[27]"/360,10,70/460,10,80//"UserGuide/section_1.html","S1D1");单件/批量磨削方式选择
+	DEF VAR8=(R3/-2000,2000//$85108,$85108,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[2]"/360,40,202/460,40,60/6/"UserGuide/section_1.html","S1D10");工件左端
+	DEF VAR9=(R3/-2000,2000//$85109,$85109,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[3]"/360,60,202/460,60,60/6/"UserGuide/section_1.html","S1D11");工件右端
+	DEF VAR10=(R/-500,500//$85165,$85165,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[11]"/360,90,202/460,90,60/6/"UserGuide/section_1.html","S1D28");工件中心
+	DEF Z_INIT=(R/-2000,2000//$85101,$85101,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[29]"/360,110,202/460,110,60/6/"UserGuide/section_1.html","S1D30");内螺纹时台面起始位置
 
-	DEF JSX_X=(R/-800,800//$85126,$85126,,/WR2,ac4/"panel_18_25_chs.png"/"/NC/_N_NC_GD2_ACX/INI[24]"/360,140,202/460,140,60/7/"UserGuide/section_1.html","S1D14");机械手停留x
-	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2,ac4/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
-	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2,ac4/"panel_18_23_chs.png"/"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
+	DEF JSX_X=(R/-800,800//$85126,$85126,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[24]"/360,140,202/460,140,60/7/"UserGuide/section_1.html","S1D14");机械手停留x
+	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
+	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
 
 	DEF VAR19=(R///$85158,$85158,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
-	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR2,ac4/"panel_18_27_chs.png"/"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
 
 	DEF JIAJU_TEXT=(I///$85155,$85155,,/WR1///10,190,202/0,0,0//);
 	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2,ac4//"$R[100]"/10,210,202/110,210,60//);头架转速
@@ -308,7 +308,7 @@
 ;ifIsInternalEnd
 
 ;**********************MASK51:环形槽:panel_51:**********************
-//M(Mask51/$85025/"panel_51_0_chs.png"/)
+//M(Mask51/$85025//)
 
 	DEF X_IM=(R///$85118,$85118,,/WR1//"$AA_IM[X]"/10,10,20/30,10,60/3);X_IM
 	DEF Z_IM=(R///$85119,$85119,,/WR1//"$AA_IM[Z]"/10,30,20/30,30,60/3);Z_IM
