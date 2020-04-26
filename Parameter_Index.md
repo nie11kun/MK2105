@@ -115,7 +115,7 @@
 |DRESSER[43]|第2段起点
 |DRESSER[44]|第3段起点
 |DRESSER[45]|修整终点
-|DRESSER[46]|
+|DRESSER[46]|第一段半径调整
 |DRESSER[47]|WHEEL_DSURFACE|砂轮到修整端面位置
 |DRESSER[48]|DWHEEL_DSURFACE|修整轮到修整端面距离
 |DRESSER[49]|WHEEL_MAX_diameter|砂轮最大磨削直径
