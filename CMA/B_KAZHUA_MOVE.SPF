@@ -1,0 +1,20 @@
+PROC B_KAZHUA_MOVE DISPLOF
+;***********程序功能**********
+;*卡爪模拟动作
+;****************************
+
+IF PROCESS[119]==1;
+
+    OOO:
+    MSG("卡爪夹紧中...")
+    M75
+    G4F7
+    MSG("卡爪松开中...")
+    M76
+    G4F7
+    GOTOB OOO
+
+ENDIF
+
+RET
+

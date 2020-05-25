@@ -9,6 +9,8 @@ B_KONG_YUN_XING;空运行
 
 B_C_MOV;C轴旋转动作
 
+B_KAZHUA_MOVE;卡爪测试
+
 B_JIAJU;自磨夹具
 
 IF RING[0]==0;螺纹/环形槽加工
