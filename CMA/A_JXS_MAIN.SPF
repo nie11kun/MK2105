@@ -7,6 +7,9 @@ DRFOF
 
 M83;机械手不过来
 
+M20;吸雾开
+M26;空调开
+
 TOU: 
 B_LIXINJI_CLEAN;离心机清理
 
