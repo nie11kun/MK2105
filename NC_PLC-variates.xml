@@ -311,7 +311,7 @@
     <Row19 type="QString" value="x退刀同步动作"/>
     <Row20 type="QString" value="测量机构2汽缸回退到位"/>
     <Row21 type="QString" value="测量机构2汽缸伸出到位"/>
-    <Row22 type="QString" value=""/>
+    <Row22 type="QString" value="气密检测信号"/>
     <Row23 type="QString" value="自动门2打开开关"/>
     <Row24 type="QString" value="自动门2关闭开关"/>
     <Row25 type="QString" value=""/>

@@ -42,6 +42,13 @@ ENDIF
 
 M03;头架旋转
 
+IF $A_IN[22]==0;气密信号丢失
+    G90 G01 Z=INI[155] F=INI[56]
+    G90 G01 X=INI[23] F=INI[54]
+	MSG("未检测到工件，请查看工件是否安放到位！")
+	M0
+ENDIF
+
 G64 G01 G90 Z=INI[6] F=INI[57]*4;Z轴到磨削起点
 
 E_CYCLE_MESSAGE

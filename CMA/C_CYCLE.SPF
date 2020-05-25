@@ -46,6 +46,14 @@ IF (TECH_TIME[0]+TECH_TIME[1]+TECH_TIME[2]+TECH_TIME[3]+TECH_TIME[4]==1) OR (INI
     G4 F0.2
     M3;头架旋转
 
+    G4 F0.5
+    IF $A_IN[22]==0;气密信号丢失
+        G90 G01 Z=INI[155] F=INI[56]
+        G90 G01 X=INI[23] F=INI[54]
+        MSG("未检测到工件，请查看工件是否安放到位！")
+        M0
+    ENDIF
+
     ;ifIsInternalBegin
     IF RING[0]==0;螺纹/环形槽加工
         D_GRIND_INIT_POSITION(INI[28],INI[10],INI[56]);内螺纹
