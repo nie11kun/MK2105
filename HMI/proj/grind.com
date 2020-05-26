@@ -4,7 +4,7 @@
 ;**********************MASK18:磨削参数_内:panel_18:;**********************
 //M(Mask18/$85020/"panel_18_0_chs.png"/)
 
-	DEF DIAMETER_ADJ=(R///$85174,$85174,$85043,/WR2//"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,210,202/460,210,60//"UserGuide/section_1.html","S1D2");单次中径调整值
+	DEF DIAMETER_ADJ=(R4///$85174,$85174,$85043,/WR2//"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,210,202/460,210,60//"UserGuide/section_1.html","S1D2");单次中径调整值
 
 	DEF VAR1=(I/*0=$85135,1=$85136,2=$85137,3=$85138,4=$85139/1/$85134,,,/WR4//"/NC/_N_NC_GD2_ACX/GRIND[1]"/0,0,0/10,10,60/);磨削类型,生成文件用	
 
@@ -28,8 +28,8 @@
 	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
 	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
 
-	DEF VAR19=(R///$85158,$85158,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
-	DEF WHELL_POS_INI=(R///$85169,$85169,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+	DEF VAR19=(R4///$85158,$85158,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
+	DEF WHELL_POS_INI=(R4///$85169,$85169,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
 
 	DEF JIAJU_TEXT=(I///$85155,$85155,,/WR1///10,190,202/0,0,0//);
 	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2//"$R[100]"/10,210,202/110,210,60//);头架转速
