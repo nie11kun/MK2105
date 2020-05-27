@@ -10,6 +10,10 @@ M83;机械手不过来
 M20;吸雾开
 M26;空调开
 
+B_C_MOV;C轴旋转动作
+
+B_KAZHUA_MOVE;卡爪测试
+
 TOU: 
 B_LIXINJI_CLEAN;离心机清理
 
