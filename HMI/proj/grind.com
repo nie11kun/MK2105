@@ -28,8 +28,8 @@
 	DEF JXS_Z=(R/-2000,2000//$85127,$85127,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[156]"/360,160,202/460,160,60/7/"UserGuide/section_1.html","S1D30");机械手停留z
 	DEF JXS_C=(R/0,360//$85128,$85128,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/INI[157]"/360,180,202/460,180,60/7/"UserGuide/section_1.html","S1D30");机械手停留c
 
-	DEF VAR19=(R4///$85158,$85158,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,330,202/460,330,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
-	DEF WHELL_POS_INI=(R4///$85169,$85169,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,350,202/460,350,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
+	DEF VAR19=(R4///$85158,$85158,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[5]"/360,250,202/460,250,60//"UserGuide/section_1.html","S1D25");当前磨削接触位
+	DEF WHELL_POS_INI=(R4///$85169,$85169,,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[14]"/360,270,202/460,270,60/6/"UserGuide/section_1.html","S1D26");初始磨削接触位(对刀完成后磨削接触位)
 
 	DEF JIAJU_TEXT=(I///$85155,$85155,,/WR1///10,190,202/0,0,0//);
 	DEF JIAJU_TOUJIA=(I/0,//$85129,$85129,,/WR2//"$R[100]"/10,210,202/110,210,60//);头架转速
@@ -50,6 +50,8 @@
 	DEF CLEAN_RESET=(I/*0=$85123,1=$85143//$85132,$85132,,/WR2//"/NC/_N_NC_GD2_ACX/INI[14]"/10,130,202/130,130,60//);重置清理离心机日期
 	DEF CLEAN_ALARM=(I/*0=$85140,1=$85141//$85133,$85133,,/WR2//"/NC/_N_NC_GD2_ACX/INI[168]"/10,150,202/130,150,60//);清理离心机是否报警提示(0否1是)
 
+	DEF SPINDLE_RUN_LEVEL=(I/*0=$85191,1=$85192,2=$85193,3=$85194//$85190,$85190,,/WR2//"/NC/_N_NC_GD2_ACX/INI[170]"/360,350,202/460,350,60//);电主轴长时间停机后安全启动(0:1天/1:2天/2:2-7天/3:7天以上)
+
 	DEF VAR45=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[16]"/0,0,0/0,0,0);精简工艺参数/扩展工艺参数
 
 	DEF QCHECK=(I////WR4//"/Plc/Q113.5"/0,0,0/0,0,0);循环启动Q点检测
@@ -60,6 +62,7 @@
 	DEF JIAJU_DRESS=(I////WR4//"/NC/_N_NC_GD2_ACX/INI[159]"/0,0,0/0,0,0/);夹具修整
 	DEF TOUJIA_RUN=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[119]"/0,0,0/0,0,0/);头架旋转
 	DEF KAZHUA_MOVE=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[120]"/0,0,0/0,0,0/);卡爪活动
+	DEF ZHUZHOU_RUN=(I////WR4//"/NC/_N_NC_GD2_ACX/PROCESS[121]"/0,0,0/0,0,0/);主轴跑合
 
 	HS1=(["\\S_003.png",$85068],ac7,se3,pa0);磨削参数
 	HS2=(["\\S_004.png",$85069],ac7,se1,pa0);工艺参数
@@ -76,6 +79,7 @@
 	VS4=($85066,ac7,se1);
 	VS5=($85073,ac7,se1);
 	VS6=($85074,ac7,se1);
+	VS7=($85075,ac7,se1);
 
 	LOAD
 		IF JIXIESHOU.VAL==1
@@ -95,6 +99,9 @@
 		ENDIF
 		IF KAZHUA_MOVE.VAL==1
 			VS6.SE=3
+		ENDIF
+		IF ZHUZHOU_RUN.VAL==1
+			VS7.SE=3
 		ENDIF
 	END_LOAD
 
@@ -155,6 +162,16 @@
 		ELSE
 			KAZHUA_MOVE.VAL=0
 			VS6.SE=1
+		ENDIF	
+	END_PRESS
+
+	PRESS(VS7)
+		IF ZHUZHOU_RUN.VAL==0
+			ZHUZHOU_RUN.VAL=1
+			VS7.SE=3
+		ELSE
+			ZHUZHOU_RUN.VAL=0
+			VS7.SE=1
 		ENDIF	
 	END_PRESS
 

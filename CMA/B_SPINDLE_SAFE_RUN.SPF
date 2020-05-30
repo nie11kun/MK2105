@@ -1,0 +1,99 @@
+PROC B_SPINDLE_SAFE_RUN DISPLOF
+;***********程序功能**********
+;*电主轴长时间停机后，安全启动程序
+;****************************
+
+IF PROCESS[120]==1;主轴跑合
+
+    CASE INI[169] OF 0 GOTOF RUN_0 1 GOTOF RUN_1 2 GOTOF RUN_2 3 GOTOF RUN_3 DEFAULT GOTOF RUN_0
+
+    ;**************************************
+
+    RUN_0:
+
+    MSG("正在进行主轴跑合，大约需要11分钟")
+    F_GRINDWHEEL_RUN(8750)
+    G4 F=3*60
+
+    F_GRINDWHEEL_RUN(17500)
+    G4 F=3*60
+
+    F_GRINDWHEEL_RUN(26250)
+    G4 F=3*60
+
+    F_GRINDWHEEL_RUN(32000)
+    G4 F=2*60
+
+    GOTOF COMPLETE_RUN
+
+    ;**************************************
+
+    RUN_1:
+
+    MSG("正在进行主轴跑合，大约需要22分钟")
+    F_GRINDWHEEL_RUN(8750)
+    G4 F=5*60
+
+    F_GRINDWHEEL_RUN(17500)
+    G4 F=6*60
+
+    F_GRINDWHEEL_RUN(26250)
+    G4 F=8*60
+
+    F_GRINDWHEEL_RUN(32000)
+    G4 F=3*60
+
+    GOTOF COMPLETE_RUN
+
+    ;**************************************
+
+    RUN_2:
+
+    MSG("正在进行主轴跑合，大约需要40分钟")
+    F_GRINDWHEEL_RUN(8750)
+    G4 F=8*60
+
+    F_GRINDWHEEL_RUN(17500)
+    G4 F=10*60
+
+    F_GRINDWHEEL_RUN(26250)
+    G4 F=12*60
+
+    F_GRINDWHEEL_RUN(32000)
+    G4 F=10*60
+
+    GOTOF COMPLETE_RUN
+
+    ;**************************************
+
+    RUN_3:
+
+    MSG("正在进行主轴跑合，大约需要105分钟")
+    F_GRINDWHEEL_RUN(8750)
+    G4 F=45*60
+
+    F_GRINDWHEEL_RUN(17500)
+    G4 F=30*60
+
+    F_GRINDWHEEL_RUN(26250)
+    G4 F=20*60
+
+    F_GRINDWHEEL_RUN(32000)
+    G4 F=10*60
+
+    GOTOF COMPLETE_RUN
+
+    ;**************************************
+
+    COMPLETE_RUN:
+
+    F_GRINDWHEEL_STOP
+    MSG("跑合已完成，请结束程序然后开始正常使用机床")
+    M0
+
+    G4F9999999
+
+ENDIF
+
+RET
+
