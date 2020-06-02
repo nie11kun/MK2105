@@ -26,8 +26,8 @@ IF PROCESS[120]==1;主轴跑合
     F_GRINDWHEEL_RUN(26250)
     G4 F=3*60
 
-    MSG("正在进行主轴跑合,大约需要11分钟,当前转速 32000")
-    F_GRINDWHEEL_RUN(32000)
+    MSG("正在进行主轴跑合,大约需要11分钟,当前转速 30000")
+    F_GRINDWHEEL_RUN(30000)
     G4 F=2*60
 
     GOTOF COMPLETE_RUN
@@ -48,8 +48,8 @@ IF PROCESS[120]==1;主轴跑合
     F_GRINDWHEEL_RUN(26250)
     G4 F=8*60
 
-    MSG("正在进行主轴跑合,大约需要22分钟,当前转速 32000")
-    F_GRINDWHEEL_RUN(32000)
+    MSG("正在进行主轴跑合,大约需要22分钟,当前转速 30000")
+    F_GRINDWHEEL_RUN(30000)
     G4 F=3*60
 
     GOTOF COMPLETE_RUN
@@ -70,8 +70,8 @@ IF PROCESS[120]==1;主轴跑合
     F_GRINDWHEEL_RUN(26250)
     G4 F=12*60
 
-    MSG("正在进行主轴跑合,大约需要40分钟,当前转速 32000")
-    F_GRINDWHEEL_RUN(32000)
+    MSG("正在进行主轴跑合,大约需要40分钟,当前转速 30000")
+    F_GRINDWHEEL_RUN(30000)
     G4 F=10*60
 
     GOTOF COMPLETE_RUN
@@ -92,8 +92,8 @@ IF PROCESS[120]==1;主轴跑合
     F_GRINDWHEEL_RUN(26250)
     G4 F=20*60
 
-    MSG("正在进行主轴跑合,大约需要105分钟,当前转速 32000")
-    F_GRINDWHEEL_RUN(32000)
+    MSG("正在进行主轴跑合,大约需要105分钟,当前转速 30000")
+    F_GRINDWHEEL_RUN(30000)
     G4 F=10*60
 
     GOTOF COMPLETE_RUN
