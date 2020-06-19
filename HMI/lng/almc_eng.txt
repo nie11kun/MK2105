@@ -175,10 +175,10 @@
 85171 0 0 "Medium dia"  ;
 85172 0 0 "Grinding start.X"  ;
 85173 0 0 "Module"  ;
-85174 0 0 "Medium-D Adj"  ;
+85174 0 0 "DIA Adj-SIGLE"  ;
 85175 0 0 "Deviation Adj"  ;
 85176 0 0 "Init Pos.C"  ;
-85177 0 0 ""  ;
+85177 0 0 "DIA Adj-CONSIST"  ;
 85178 0 0 "Pitch"  ;
 85179 0 0 "Module"  ;
 85180 0 0 "Inter Init Touch"  ;

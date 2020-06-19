@@ -664,6 +664,7 @@
 |PROCESS[118]||头架旋转
 |PROCESS[119]||卡爪活动
 |PROCESS[120]||主轴跑合
+|PROCESS[121]||直径固定每件调整设定
 |**工艺表格参数**||
 |TECHNOLOGY[0]|GRIND_METHOD_R|粗修单双磨削
 |TECHNOLOGY[1]|GRIND_METHOD_MR|半粗修单双磨削
