@@ -17,7 +17,7 @@
 ;ifIsInternalBegin
 INI[53]=20000;*对刀时砂轮转速
 INI[81]=15000;*打环形槽砂轮转速
-INI[150]=33000;*砂轮最高速度限制
+INI[150]=32000;*砂轮最高速度限制
 ;ifIsInternalEnd
 ;
 ;
