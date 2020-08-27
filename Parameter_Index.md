@@ -666,6 +666,11 @@
 |PROCESS[120]||主轴跑合
 |PROCESS[121]||直径固定每件调整设定
 |PROCESS[122]||修整方式(0单向/1来回)
+|PROCESS[123]||动态线速度(0否/1是)
+|PROCESS[124]||最高线速度
+|PROCESS[125]||最高限速度对应直径
+|PROCESS[126]||最低线速度
+|PROCESS[127]||最低限速度对应直径
 |**工艺表格参数**||
 |TECHNOLOGY[0]|GRIND_METHOD_R|粗修单双磨削
 |TECHNOLOGY[1]|GRIND_METHOD_MR|半粗修单双磨削

@@ -8,6 +8,8 @@ PROC B_SCREW DISPLON
 
 C_PAR_INI;参数初始化子程序
 
+C_DYNAMIC_SPEED;动态线速度
+
 IF DRESSER[6]<>0;有报警标记则退出程序
     GOTOF G_ENDING
 ENDIF

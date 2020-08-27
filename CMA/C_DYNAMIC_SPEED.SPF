@@ -1,0 +1,59 @@
+PROC C_DYNAMIC_SPEED DISPLOF
+;***********程序功能**********
+;*动态线速度
+;****************************
+
+DEF REAL SPEED_NOW,DIA_PERCENT
+
+IF (INI[144]==0) AND (PROCESS[123]==1);砂轮不是恒转速模式且动态线速度激活
+    IF DRESSER[24]>=PROCESS[125];当前砂轮直径大于最高线速度对应直径
+        IF TECHNOLOGY[160]<>0;粗磨线速度
+            TECHNOLOGY[160]=PROCESS[124];最高线速度
+        ENDIF
+        IF TECHNOLOGY[161]<>0;半精磨线速度
+            TECHNOLOGY[161]=PROCESS[124];最高线速度
+        ENDIF
+        IF TECHNOLOGY[162]<>0;精磨线速度
+            TECHNOLOGY[162]=PROCESS[124];最高线速度
+        ENDIF
+        IF TECHNOLOGY[163]<>0;终磨线速度
+            TECHNOLOGY[163]=PROCESS[124];最高线速度
+        ENDIF
+        WHEEL_LINESPEED_DRESS[1]=PROCESS[124];最高线速度
+    ELSE
+        IF DRESSER[24]<=PROCESS[127];当前砂轮直径小于最低线速度对应直径
+            IF TECHNOLOGY[160]<>0;粗磨线速度
+                TECHNOLOGY[160]=PROCESS[126];最低线速度
+            ENDIF
+            IF TECHNOLOGY[161]<>0;半精磨线速度
+                TECHNOLOGY[161]=PROCESS[126];最低线速度
+            ENDIF
+            IF TECHNOLOGY[162]<>0;精磨线速度
+                TECHNOLOGY[162]=PROCESS[126];最低线速度
+            ENDIF
+            IF TECHNOLOGY[163]<>0;终磨线速度
+                TECHNOLOGY[163]=PROCESS[126];最低线速度
+            ENDIF
+            WHEEL_LINESPEED_DRESS[1]=PROCESS[126];最低线速度
+        ELSE
+            DIA_PERCENT=(DRESSER[24]-PROCESS[127])/(PROCESS[125]-PROCESS[127]);当前砂轮直径占比
+            SPEED_NOW=(PROCESS[124]-PROCESS[126])*DIA_PERCENT+PROCESS[126]
+            IF TECHNOLOGY[160]<>0;粗磨线速度
+                TECHNOLOGY[160]=SPEED_NOW;动态线速度
+            ENDIF
+            IF TECHNOLOGY[161]<>0;半精磨线速度
+                TECHNOLOGY[161]=SPEED_NOW;动态线速度
+            ENDIF
+            IF TECHNOLOGY[162]<>0;精磨线速度
+                TECHNOLOGY[162]=SPEED_NOW;动态线速度
+            ENDIF
+            IF TECHNOLOGY[163]<>0;终磨线速度
+                TECHNOLOGY[163]=SPEED_NOW;动态线速度
+            ENDIF
+            WHEEL_LINESPEED_DRESS[1]=SPEED_NOW;动态线速度
+        ENDIF
+    ENDIF
+ENDIF
+
+RET
+
