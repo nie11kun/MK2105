@@ -4,7 +4,7 @@
 ;**********************MASK18:磨削参数_内:panel_18:;**********************
 //M(Mask18/$85020/"panel_18_0_chs.png"/)
 
-	DEF DIAMETER_ADJ=(R4///$85174,$85174,$85043,/WR2//"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,210,202/460,210,60//"UserGuide/section_1.html","S1D2");单次中径调整值
+	DEF DIAMETER_ADJ=(R4/-0.2,0.2//$85174,$85174,$85043,/WR2//"/NC/_N_NC_GD2_ACX/GRIND[5]"/360,210,202/460,210,60//"UserGuide/section_1.html","S1D2");单次中径调整值
 	DEF DIAMETER_ADJ_2=(R4///$85177,$85177,$85043,/WR2,ac4//"/NC/_N_NC_GD2_ACX/PROCESS[122]"/360,240,202/460,240,60//"UserGuide/section_1.html","S1D2");直径固定每件调整设定
 
 	DEF VAR1=(I/*0=$85135,1=$85136,2=$85137,3=$85138,4=$85139/1/$85134,,,/WR4//"/NC/_N_NC_GD2_ACX/GRIND[1]"/0,0,0/10,10,60/);磨削类型,生成文件用
